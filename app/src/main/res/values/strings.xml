@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Narchive</string>
+
+    <string name="KAKAO_NATIVE_KEY">a8b73ee6826d48109d06c1924f7ba3cb</string>
+    <string name="KAKAO_REST_KEY">e53c9019aeb0fc9996de090f883a002e</string>
+    <string name="NAVER_CLIENT_ID">rYIPVMa5hzDna72Bc3HG</string>
+    <string name="NAVER_CLIENT_SECRET">G7G1e_GWrz</string>
+
+    <!-- 공통 -->
+    <string name="common_correct">확인</string>
+    <!-- 회원가입 -->
+    <string name="input_id_please">아이디</string>
+    <string name="input_pw_please">비밀번호</string>
+
+    <!-- 프로필 설정 -->
+    <string name="set_profile">프로필 설정</string>
+    <string name="set_profile_nickname_notion">* 띄어쓰기 없이 1~13자 이내로 입력해주세요.</string>
+    <!-- 시작 전 안내화면 -->
+    <string name="before_start_btn_start">시작하기</string>
+
+    <!-- 메인 화면 -->
+    <string name="main_add_comment">댓글 입력하기</string>
+    <string name="no_feeds">아직 작성된 기록이 없어요.</string>
+
+    <!-- 책 모아보기 툴 -->
+    <string name="book_author">저자  %s</string>
+    <string name="book_publisher">출판  %s</string>
+    <string name="book_date">발매  %s</string>
+
+    <!-- 글 작성화면 -->
+    <string name="write_hows_your_mood">오늘의 기분은?</string>
+    <string name="write_content_hint">오늘은 무슨 일이 있었나요? 저에게 말해주세요. :)</string>
+    <string name="write_show_image_count">사진 : %d / 4</string>
+    <string name="write_show_book_count">책 : %d / 1</string>
+    <string name="write_show_movie_count">영화 : %d / 1</string>
+
+    <!-- 책/영화 검색하기 -->
+    <string name="search_search">검색하기</string>
+    <string name="search_input_search">검색어를 입력하세요.</string>
+
+    <!-- 댓글 쓰기 -->
+    <string name="comment_write_comment">댓글 쓰기</string>
+    <string name="comment_input_please">댓글을 입력해주세요.</string>
+
+    <!-- 검색어 -->
+    <string name="filter_input_please">검색어를 입력해주세요.</string>
+
+</resources>

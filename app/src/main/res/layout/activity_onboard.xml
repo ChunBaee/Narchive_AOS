@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.chunb.narchive.presentation.ui.onboarding.view.OnBoardingActivity" />
+
+        <variable
+            name="viewModel"
+            type="com.chunb.narchive.presentation.ui.onboarding.viewmodel.OnBoardingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/before_start_vp_notion"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            onBoardingAdapter="@{activity.onBoardingAdapter}"
+            isEnabled="@{activity.startButton}"
+            setIndicator="@{activity.onBoardingIndicator}"
+            app:layout_constraintDimensionRatio="0.8:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/before_start_tab_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            app:tabGravity="center"
+            app:tabIndicator="@null"
+            app:tabBackground="@drawable/item_bg_tab_indicator"
+            android:background="@android:color/transparent"
+            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintTop_toBottomOf="@id/before_start_vp_notion"
+            app:layout_constraintBottom_toTopOf="@id/before_start_btn_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/before_start_btn_start"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/selector_btn_finish"
+            android:text="@string/before_start_btn_start"
+            android:onClick="@{() -> activity.dismissOnBoarding()}"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

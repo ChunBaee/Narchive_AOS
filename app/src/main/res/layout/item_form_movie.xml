@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="movieData"
+            type="com.chunb.narchive.data.remote.response.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="3dp"
+        android:background="@drawable/bg_card_4_f7f8f9"
+        android:elevation="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/bg_card_shape_ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/item_archive_vp_inner_iv_movie_cover"
+                setImage="@{movieData.movieImageThumbnail}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1.25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.18" />
+
+            <TextView
+                android:id="@+id/item_archive_vp_inner_tv_movie_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{movieData.movieTitle}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/item_archive_vp_inner_tv_movie_released"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/item_archive_vp_inner_iv_movie_cover"
+                app:layout_constraintTop_toTopOf="@id/item_archive_vp_inner_iv_movie_cover"
+                tools:text="책 제목입니다" />
+
+            <TextView
+                android:id="@+id/item_archive_vp_inner_tv_movie_released"
+                setBookAndMovieInfoForm="@{movieData.director}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/color_727272"
+                app:layout_constraintBottom_toTopOf="@id/item_archive_vp_inner_tv_movie_director"
+                app:layout_constraintEnd_toEndOf="@+id/item_archive_vp_inner_tv_movie_name"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/item_archive_vp_inner_tv_movie_name"
+                app:layout_constraintTop_toBottomOf="@id/item_archive_vp_inner_tv_movie_name"
+                tools:text="@string/book_author" />
+
+            <TextView
+                android:id="@+id/item_archive_vp_inner_tv_movie_director"
+                setBookAndMovieInfoForm="@{movieData.actor}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/color_727272"
+                app:layout_constraintEnd_toEndOf="@+id/item_archive_vp_inner_tv_movie_name"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/item_archive_vp_inner_tv_movie_name"
+                app:layout_constraintTop_toBottomOf="@id/item_archive_vp_inner_tv_movie_released"
+                app:layout_constraintVertical_bias="0"
+                tools:text="@string/book_publisher" />
+
+            <TextView
+                android:id="@+id/item_archive_vp_inner_tv_movie_date"
+                setBookAndMovieInfoForm="@{movieData.releaseYear}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/color_727272"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/item_archive_vp_inner_tv_movie_name"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/item_archive_vp_inner_tv_movie_name"
+                app:layout_constraintTop_toBottomOf="@id/item_archive_vp_inner_tv_movie_director"
+                app:layout_constraintVertical_bias="0"
+                tools:text="@string/book_publisher" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

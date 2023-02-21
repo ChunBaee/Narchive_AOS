@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".Narchive"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Narchive"
+        tools:targetApi="31">
+
+        <activity android:name=".presentation.ui.splash.view.SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".presentation.ui.main.view.MainActivity"
+            android:exported="true"/>
+
+        <activity android:name=".presentation.ui.auth.view.SignInActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".presentation.ui.onboarding.view.OnBoardingActivity"
+            android:exported="true" />
+
+        <activity android:name=".presentation.ui.profile.view.ProfileActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:host="oauth"
+                    android:scheme="kakaoa8b73ee6826d48109d06c1924f7ba3cb" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>
