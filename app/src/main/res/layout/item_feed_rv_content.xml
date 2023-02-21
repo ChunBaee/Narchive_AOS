@@ -5,7 +5,11 @@
     <data>
         <variable
             name="content"
-            type="com.chunb.narchive.domain.data.Contents" />
+            type="com.chunb.narchive.data.remote.response.ResponseFeed" />
+
+        <variable
+            name="comment"
+            type="com.chunb.narchive.data.remote.response.Comment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -174,7 +178,7 @@
                     android:textColor="@color/black"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:text="@{content.comments.nickName}"
+                    android:text="@{comment.nickName}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_view_comment_divider" />
 
@@ -187,7 +191,7 @@
                     android:maxLines="1"
                     android:textColor="@color/black"
                     android:textSize="13sp"
-                    android:text="@{content.comments.content}"
+                    android:text="@{comment.content}"
                     app:layout_constraintBottom_toBottomOf="@id/item_main_rv_contents_txt_last_comment_nickname"
                     app:layout_constraintEnd_toStartOf="@id/item_main_rv_comments_txt_count_comment"
                     app:layout_constraintStart_toEndOf="@id/item_main_rv_contents_txt_last_comment_nickname"

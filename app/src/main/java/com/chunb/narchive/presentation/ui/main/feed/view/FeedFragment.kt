@@ -8,24 +8,32 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.chunb.narchive.R
 import com.chunb.narchive.databinding.FragmentFeedBinding
+import com.chunb.narchive.presentation.ui.main.feed.adapter.FeedListAdapter
 import com.chunb.narchive.presentation.ui.main.feed.adapter.HomeFeedAdapter
 import com.chunb.narchive.presentation.ui.main.viewmodel.MainViewModel
 import com.chunb.narchive.presentation.util.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonDisposableHandle.parent
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class FeedFragment : Fragment() {
-    private lateinit var binding : FragmentFeedBinding
-    private val viewModel : MainViewModel by viewModels()
+    private lateinit var binding: FragmentFeedBinding
+    private val viewModel: MainViewModel by viewModels()
     private val feedAdapter by lazy {
-        HomeFeedAdapter()
+        //HomeFeedAdapter()
+        FeedListAdapter()
     }
     private val loadingDialog by lazy {
         LoadingDialog(requireActivity())
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +51,7 @@ class FeedFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModel.getFeedData()
-        loadingDialog.show()
+        //loadingDialog.show()
     }
 
     private fun initBinding() {
@@ -56,10 +64,11 @@ class FeedFragment : Fragment() {
     }
 
     private fun observeFeed() {
-        viewModel.homeFeedData.observe(viewLifecycleOwner) {
-            loadingDialog.dismiss()
-            feedAdapter.list = it
-            feedAdapter.notifyDataSetChanged()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getFeedData().collectLatest {
+                withContext(Dispatchers.Main) { loadingDialog.dismiss() }
+                feedAdapter.submitData(it)
+            }
         }
     }
 

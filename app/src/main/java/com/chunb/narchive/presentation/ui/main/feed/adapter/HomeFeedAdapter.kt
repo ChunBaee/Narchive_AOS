@@ -8,6 +8,7 @@ import androidx.databinding.adapters.ViewStubBindingAdapter.setOnInflateListener
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.chunb.narchive.data.remote.response.Comment
+import com.chunb.narchive.data.remote.response.ResponseFeed
 import com.chunb.narchive.databinding.ItemFeedRvContentBinding
 import com.chunb.narchive.databinding.ItemFeedRvWhenNullBinding
 import com.chunb.narchive.databinding.ItemFormBookBinding
@@ -15,7 +16,7 @@ import com.chunb.narchive.databinding.ItemFormMovieBinding
 import com.chunb.narchive.domain.data.Contents
 
 class HomeFeedAdapter : RecyclerView.Adapter<ViewHolder>() {
-    var list = mutableListOf<Contents>()
+    var list = mutableListOf<ResponseFeed>()
 
     private lateinit var commentClickedListener: CommentClickedListener
 
@@ -34,34 +35,41 @@ class HomeFeedAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     inner class HomeFeedViewHolder(private val binding: ItemFeedRvContentBinding) :
         ViewHolder(binding.root) {
-        fun bind(item: Contents) {
+        fun bind(item: ResponseFeed) {
             binding.content = item
 
-            binding.itemMainRvContentsBtnComment.setOnClickListener {
-                commentClickedListener.commentClickedListener(it, item.contentIdx)
+            binding.comment = if(item.comments?.isNotEmpty() == true) {
+                item.comments!![0]
+            } else {
+                Comment(0,0,"","","","")
             }
 
-            if(item.book != null) {
+
+            binding.itemMainRvContentsBtnComment.setOnClickListener {
+                commentClickedListener.commentClickedListener(it, item.content.contentIdx)
+            }
+
+            if(item.book?.isNotEmpty() == true) {
                 binding.itemMainRvContentsLayoutBook.apply {
-                    setOnInflateListener { viewStub, view ->
+                    setOnInflateListener { _, _ ->
                         val bookBinding = this.binding as ItemFormBookBinding
-                        bookBinding.bookData = item.book
+                        bookBinding.bookData = item.book[0]
                     }
                 }
                 binding.itemMainRvContentsLayoutBook.viewStub?.inflate()
             }
-            if(item.movie != null) {
+            if(item.movie?.isNotEmpty() == true) {
                 binding.itemMainRvContentsLayoutMovie.apply {
-                    setOnInflateListener { viewStub, view ->
+                    setOnInflateListener { _, _ ->
                         val movieBinding = this.binding as ItemFormMovieBinding
-                        movieBinding.movieData = item.movie
+                        movieBinding.movieData = item.movie[0]
                     }
                 }
                 binding.itemMainRvContentsLayoutMovie.viewStub?.inflate()
             }
 
-            if(!item.images.isNullOrEmpty()) {
-                binding.itemMainRvContentsRvImages.adapter = HomeFeedImageAdapter(item.images.toMutableList())
+            if(!item.image.isNullOrEmpty()) {
+                binding.itemMainRvContentsRvImages.adapter = HomeFeedImageAdapter(item.image.toMutableList())
             }
         }
     }
