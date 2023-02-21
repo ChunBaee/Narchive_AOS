@@ -5,6 +5,7 @@ import com.chunb.narchive.data.remote.response.Image
 import com.chunb.narchive.data.remote.response.Movie
 import com.chunb.narchive.data.remote.response.Book
 import com.chunb.narchive.data.remote.response.Comment
+import com.chunb.narchive.data.remote.response.ResponseFeed
 import com.chunb.narchive.data.remote.response.User
 import com.chunb.narchive.domain.data.Contents
 import com.chunb.narchive.domain.repository.BookRepository
@@ -16,80 +17,50 @@ import com.chunb.narchive.domain.repository.UserRepository
 import javax.inject.Inject
 
 class ContentUseCase @Inject constructor(
-    private val bookRepository: BookRepository,
-    private val userRepository: UserRepository,
-    private val movieRepository: MovieRepository,
     private val contentRepository: ContentRepository,
-    private val imageRepository: ImageRepository,
-    private val commentRepository: CommentRepository
 ) {
 
-    suspend fun mapToContentList(query : String?): MutableList<Contents> {
-        val returnList = mutableListOf<Contents>()
-
-        for (i in getContentList(query)) {
-            returnList.add(
+    suspend fun mapToContents(page : Int) : List<Contents> {
+        val contents = mutableListOf<Contents>()
+        for (i in getFeedData(page)) {
+            contents.add(
                 Contents(
-                    i.contentIdx,
-                    getTargetUser(i.contentIdx, getUserList(query)),
-                    i,
-                    getTargetBook(i.contentIdx, getBookList(query)),
-                    getTargetMovie(i.contentIdx, getMovieList(query)),
-                    getTargetImages(i.contentIdx, getImageList(query)),
-                    getTargetLastComment(i.contentIdx, getLastCommentList(query))
+                    contentIdx = i.contentIdx,
+                    user = mapUser(i),
+                    content = mapContent(i),
+                    book = mapBook(i),
+                    movie = mapMovie(i),
+                    i.image,
+                    comments = mapComment(i)
                 )
             )
         }
-        return returnList
+        return contents
     }
 
-    private suspend fun getBookList(query : String?): List<Book> {
-        return bookRepository.getBook(query).getOrNull()!!
+
+    private suspend fun getFeedData(page : Int) : List<ResponseFeed> {
+        return contentRepository.getFeed(page).getOrThrow()
     }
 
-    private suspend fun getUserList(query : String?): List<User> {
-        return userRepository.getUserWithContentId(query).getOrNull()!!
+    private fun mapUser(data : ResponseFeed) : User {
+        return User(data.userProfile, data.userNickName)
     }
 
-    private suspend fun getMovieList(query : String?): List<Movie> {
-        return movieRepository.getMovies(query).getOrNull()!!
+    private fun mapContent(data : ResponseFeed) : Content {
+        return Content(data.updatedAt, data.content, data.mood, data.commentCount)
     }
 
-    private suspend fun getContentList(query : String?): List<Content> {
-        return contentRepository.getContents(query).getOrNull()!!
+    private fun mapBook(data : ResponseFeed) : Book? {
+        return Book(data.bookThumbnail, data.bookTitle, data.bookAuthor, data.bookPublisher, data.bookPublishedDate)
     }
 
-    private suspend fun getImageList(query : String?): List<Image> {
-        return imageRepository.getImages(query).getOrNull()!!
+    private fun mapMovie(data : ResponseFeed) : Movie {
+        return Movie(data.movieThumbnail, data.movieTitle, data.movieDirector, data.movieActor, data.movieReleaseYear)
     }
 
-    private suspend fun getLastCommentList(query : String?): List<Comment> {
-        return commentRepository.getLastComment(query).getOrNull()!!
+    private fun mapComment(data : ResponseFeed) : Comment? {
+        return Comment(null, data.commentContent, data.commentNickName, null, null)
     }
-
-    private fun getTargetUser(
-        contentId: Int,
-        targetList: List<User>
-    ): User = targetList.find { it.contentIdx == contentId }!!
-
-    private fun getTargetBook(
-        contentId: Int,
-        targetList: List<Book>
-    ): Book? = targetList.find { it.contentIdx == contentId }
-
-    private fun getTargetMovie(
-        contentId: Int,
-        targetList: List<Movie?>
-    ): Movie? = targetList.find { it?.contentIdx == contentId }
-
-    private fun getTargetImages(
-        contentId: Int,
-        targetList: List<Image>
-    ): List<String>? = targetList.find { it.contentIdx == contentId }?.images
-
-    private fun getTargetLastComment(
-        contentId: Int,
-        targetList: List<Comment>
-    ): Comment? = targetList.find { it.contentId == contentId }
 
 }

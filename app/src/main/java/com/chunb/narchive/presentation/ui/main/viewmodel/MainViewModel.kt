@@ -18,7 +18,7 @@ class MainViewModel @Inject constructor(private val contentUseCase: ContentUseCa
 
     fun getFeedData() {
         viewModelScope.launch {
-            _homeFeedData.value = contentUseCase.mapToContentList(null)
+            _homeFeedData.value = contentUseCase.mapToContents(0) as MutableList
         }
     }
 }

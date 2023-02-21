@@ -38,7 +38,7 @@ class HomeFeedAdapter : RecyclerView.Adapter<ViewHolder>() {
             binding.content = item
 
             binding.itemMainRvContentsBtnComment.setOnClickListener {
-                commentClickedListener.commentClickedListener(it, item.content.contentIdx)
+                commentClickedListener.commentClickedListener(it, item.contentIdx)
             }
 
             if(item.book != null) {
@@ -72,7 +72,13 @@ class HomeFeedAdapter : RecyclerView.Adapter<ViewHolder>() {
     ): ViewHolder {
         return when(viewType) {
              0 -> {
-                 HomeFeedViewHolder(ItemFeedRvContentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+                 HomeFeedViewHolder(
+                     ItemFeedRvContentBinding.inflate(
+                         LayoutInflater.from(
+                             parent.context
+                         ), parent, false
+                     )
+                 )
              }
             else -> {
                 HomeFeedWhenNullViewHolder(ItemFeedRvWhenNullBinding.inflate(LayoutInflater.from(parent.context), parent, false))

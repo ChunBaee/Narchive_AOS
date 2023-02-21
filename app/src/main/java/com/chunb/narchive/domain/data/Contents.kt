@@ -3,6 +3,7 @@ package com.chunb.narchive.domain.data
 import com.chunb.narchive.data.remote.response.Book
 import com.chunb.narchive.data.remote.response.Comment
 import com.chunb.narchive.data.remote.response.Content
+import com.chunb.narchive.data.remote.response.Image
 import com.chunb.narchive.data.remote.response.Movie
 import com.chunb.narchive.data.remote.response.User
 
@@ -12,6 +13,6 @@ data class Contents(
     var content : Content,
     var book : Book?,
     var movie : Movie?,
-    val images : List<String>?,
+    val images : List<Image>?,
     var comments : Comment?
 )
