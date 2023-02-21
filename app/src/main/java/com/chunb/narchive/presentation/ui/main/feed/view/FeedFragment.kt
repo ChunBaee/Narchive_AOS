@@ -1,5 +1,6 @@
 package com.chunb.narchive.presentation.ui.main.feed.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.chunb.narchive.databinding.FragmentFeedBinding
 import com.chunb.narchive.presentation.ui.main.feed.adapter.FeedListAdapter
 import com.chunb.narchive.presentation.ui.main.feed.adapter.HomeFeedAdapter
 import com.chunb.narchive.presentation.ui.main.viewmodel.MainViewModel
+import com.chunb.narchive.presentation.ui.write.view.WriteActivity
 import com.chunb.narchive.presentation.util.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -74,6 +76,10 @@ class FeedFragment : Fragment() {
 
     fun scrollToTop() {
         binding.fgMainRvContents.smoothScrollToPosition(0)
+    }
+
+    fun openWrite() {
+        startActivity(Intent(requireActivity(), WriteActivity::class.java))
     }
 
 }

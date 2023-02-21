@@ -44,6 +44,9 @@
             android:exported="true"
             android:windowSoftInputMode="adjustResize"/>
 
+        <activity android:name=".presentation.ui.write.view.WriteActivity"
+            android:exported="true" />
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
