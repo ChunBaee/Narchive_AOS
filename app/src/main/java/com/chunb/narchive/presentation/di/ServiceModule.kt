@@ -8,8 +8,10 @@ import com.chunb.narchive.data.remote.service.ImageService
 import com.chunb.narchive.data.remote.service.KakaoUserService
 import com.chunb.narchive.data.remote.service.MovieService
 import com.chunb.narchive.data.remote.service.ProfileService
+import com.chunb.narchive.data.remote.service.SearchKakaoService
 import com.chunb.narchive.data.remote.service.UserService
 import com.chunb.narchive.presentation.di.annotation.KakaoAuthRetrofit
+import com.chunb.narchive.presentation.di.annotation.KakaoRetrofit
 import com.chunb.narchive.presentation.di.annotation.NarchiveRetrofit
 import dagger.Module
 import dagger.Provides
@@ -58,4 +60,8 @@ class ServiceModule {
     @Provides
     @Singleton
     fun provideUserService(@NarchiveRetrofit retrofit: Retrofit) : UserService = retrofit.create(UserService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSearchKakaoService(@KakaoRetrofit retrofit : Retrofit) : SearchKakaoService = retrofit.create(SearchKakaoService::class.java)
 }

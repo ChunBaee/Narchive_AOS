@@ -1,4 +1,4 @@
-package com.chunb.narchive.presentation.ui.write.write.adapter
+package com.chunb.narchive.presentation.ui.write.adapter
 
 import android.view.LayoutInflater
 import android.view.View

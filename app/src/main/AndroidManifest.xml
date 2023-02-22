@@ -47,6 +47,9 @@
         <activity android:name=".presentation.ui.write.view.WriteActivity"
             android:exported="true" />
 
+        <activity android:name=".presentation.ui.search.view.SearchActivity"
+            android:exported="true" />
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">

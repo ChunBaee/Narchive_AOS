@@ -1,19 +1,17 @@
-package com.chunb.narchive.presentation.ui.write.write.adapter
+package com.chunb.narchive.presentation.ui.write.adapter
 
-import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.chunb.narchive.databinding.ItemFormHorizontalImageBinding
 
-class WriteImageAdapter(private val images : MutableList<Uri>) : RecyclerView.Adapter<WriteImageAdapter.WriteImageViewHolder>() {
-    //var images = mutableListOf<Uri>()
+class WriteImageAdapter : RecyclerView.Adapter<WriteImageAdapter.WriteImageViewHolder>() {
+    var images = mutableListOf<String>()
 
     inner class WriteImageViewHolder(private val binding : ItemFormHorizontalImageBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : Uri) {
-            Log.d("----", "bind: $item")
-            binding.imagePath = item.toString()
+        fun bind(item : String) {
+            binding.imagePath = item
         }
     }
 
@@ -23,16 +21,10 @@ class WriteImageAdapter(private val images : MutableList<Uri>) : RecyclerView.Ad
 
     override fun getItemCount(): Int {
         Log.d("----", "getItemCount: ${images.size}")
-        return images.size
+      return images.size
     }
 
     override fun onBindViewHolder(holder: WriteImageViewHolder, position: Int) {
         holder.bind(images[position])
-        Log.d("----", "onBindViewHolder: $images")
-    }
-
-    fun setImage(new : List<Uri>) {
-        //images = new as MutableList
-        notifyDataSetChanged()
     }
 }

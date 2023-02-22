@@ -16,7 +16,6 @@ class FeedListAdapter() : PagingDataAdapter<ResponseFeed, FeedListAdapter.FeedVi
 
     inner class FeedViewHolder(private val binding : ItemFeedRvContentBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : ResponseFeed) {
-            Log.d("----", "bind: ${item.content.content}")
             binding.content = item
 
             binding.comment = if(item.comments?.isNotEmpty() == true) {

@@ -10,6 +10,7 @@ import com.chunb.narchive.data.repository.KakaoAuthRepositoryImpl
 import com.chunb.narchive.data.repository.LocalResourceRepositoryImpl
 import com.chunb.narchive.data.repository.MovieRepositoryImpl
 import com.chunb.narchive.data.repository.ProfileRepositoryImpl
+import com.chunb.narchive.data.repository.SearchRepositoryImpl
 import com.chunb.narchive.data.repository.UserRepositoryImpl
 import com.chunb.narchive.domain.repository.AuthRepository
 import com.chunb.narchive.domain.repository.BookRepository
@@ -21,6 +22,7 @@ import com.chunb.narchive.domain.repository.KakaoAuthRepository
 import com.chunb.narchive.domain.repository.LocalResourceRepository
 import com.chunb.narchive.domain.repository.MovieRepository
 import com.chunb.narchive.domain.repository.ProfileRepository
+import com.chunb.narchive.domain.repository.SearchRepository
 import com.chunb.narchive.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
@@ -64,4 +66,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindUserRepository (userRepositoryImpl: UserRepositoryImpl) : UserRepository
+
+    @Binds
+    abstract fun bindSearchRepository (searchRepositoryImpl: SearchRepositoryImpl) : SearchRepository
 }
