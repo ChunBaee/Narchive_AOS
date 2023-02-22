@@ -17,6 +17,12 @@ class WriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        initBinding()
+    }
+
+    private fun initBinding() {
+        binding.lifecycleOwner = this
     }
 
     override fun onStart() {

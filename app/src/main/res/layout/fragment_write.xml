@@ -8,6 +8,10 @@
             name="fragment"
             type="com.chunb.narchive.presentation.ui.write.write.view.WriteFragment" />
 
+        <variable
+            name="viewModel"
+            type="com.chunb.narchive.presentation.ui.write.viewmodel.WriteViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,7 +68,7 @@
                 android:layout_marginStart="15dp"
                 android:text="@string/write_hows_your_mood"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +80,7 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="20dp"
                 android:onClick="@{() -> fragment.initPopup()}"
-                android:src="@drawable/ic_face_default"
+                setImage="@{viewModel.currentMood.moods.second}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -104,6 +108,7 @@
             android:src="@drawable/ic_cloud"
             app:borderWidth="0dp"
             app:fabSize="mini"
+            android:onClick="@{() -> fragment.openAddedDrawer()}"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@id/write_layout_added_things"
             app:layout_constraintStart_toStartOf="@id/write_layout_added_things"
@@ -115,7 +120,7 @@
             android:id="@+id/write_layout_added_things"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@color/color_e8f6f6"
             app:layout_constraintBottom_toTopOf="@id/write_layout_bottom_additional"
             app:layout_constraintEnd_toEndOf="parent"
@@ -187,7 +192,7 @@
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:layout_marginEnd="10dp"
-                android:clickable="true"
+                android:onClick="@{() -> fragment.initOpenGallery()}"
                 android:src="@drawable/ic_write_open_gallery"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/write_btn_search_book"
