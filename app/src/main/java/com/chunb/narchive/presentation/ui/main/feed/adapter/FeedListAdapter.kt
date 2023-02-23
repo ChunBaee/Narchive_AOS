@@ -3,9 +3,11 @@ package com.chunb.narchive.presentation.ui.main.feed.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.adapters.ViewStubBindingAdapter.setOnInflateListener
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.chunb.narchive.data.data.Mood
 import com.chunb.narchive.data.remote.response.Comment
 import com.chunb.narchive.data.remote.response.ResponseFeed
 import com.chunb.narchive.databinding.ItemFeedRvContentBinding
@@ -18,18 +20,20 @@ class FeedListAdapter() : PagingDataAdapter<ResponseFeed, FeedListAdapter.FeedVi
         fun bind(item : ResponseFeed) {
             binding.content = item
 
-            binding.comment = if(item.comments?.isNotEmpty() == true) {
+            binding.comment = if (item.comments?.isNotEmpty() == true) {
                 item.comments!![0]
             } else {
-                Comment(0,0,"","","","")
+                Comment(0, 0, "", "", "", "")
             }
+
+            binding.mood = Mood.valueOf(item.content.mood).res
 
 
             /*binding.itemMainRvContentsBtnComment.setOnClickListener {
                 commentClickedListener.commentClickedListener(it, item.content.contentIdx)
             }*/
 
-            if(item.book?.isNotEmpty() == true) {
+            if (item.book?.isNotEmpty() == true) {
                 binding.itemMainRvContentsLayoutBook.apply {
                     setOnInflateListener { _, _ ->
                         val bookBinding = this.binding as ItemFormBookBinding
@@ -38,7 +42,7 @@ class FeedListAdapter() : PagingDataAdapter<ResponseFeed, FeedListAdapter.FeedVi
                 }
                 binding.itemMainRvContentsLayoutBook.viewStub?.inflate()
             }
-            if(item.movie?.isNotEmpty() == true) {
+            if (item.movie?.isNotEmpty() == true) {
                 binding.itemMainRvContentsLayoutMovie.apply {
                     setOnInflateListener { _, _ ->
                         val movieBinding = this.binding as ItemFormMovieBinding
@@ -48,10 +52,14 @@ class FeedListAdapter() : PagingDataAdapter<ResponseFeed, FeedListAdapter.FeedVi
                 binding.itemMainRvContentsLayoutMovie.viewStub?.inflate()
             }
 
-            if(!item.image.isNullOrEmpty()) {
-                binding.itemMainRvContentsRvImages.adapter = HomeFeedImageAdapter(item.image.toMutableList())
+            Log.d("0000", "bind: ${item.images}")
+
+            if (!item.images.isNullOrEmpty()) {
+                binding.itemMainRvContentsRvImages.adapter =
+                    HomeFeedImageAdapter(item.images.toMutableList())
             }
         }
+
     }
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {

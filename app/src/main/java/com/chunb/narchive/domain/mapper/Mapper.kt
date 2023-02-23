@@ -1,6 +1,7 @@
 package com.chunb.narchive.domain.mapper
 
 import android.text.Html
+import com.chunb.narchive.data.remote.request.RequestPostContent
 import com.chunb.narchive.data.remote.response.Book
 import com.chunb.narchive.data.remote.response.Movie
 import com.chunb.narchive.data.remote.response.ResultSearchBook
@@ -23,5 +24,15 @@ fun ResultSearchMovie.mapToMovie(): Movie {
         "감독  " + this.director.replace("|", " "),
         "배우  " + this.actor.replace("|", " "),
         "개봉년도  " + this.pubDate
+    )
+}
+
+fun String.mapToFeedData(mood : String, imageList : MutableList<String>?, book : Book?, movie : Movie?) : RequestPostContent {
+    return RequestPostContent(
+        mood,
+        this,
+        imageList,
+        book,
+        movie
     )
 }

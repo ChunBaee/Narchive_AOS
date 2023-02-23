@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.chunb.narchive.data.local.data.MoodData
 import com.chunb.narchive.databinding.ItemMoodsForEachBinding
-import com.chunb.narchive.presentation.ui.main.feed.adapter.HomeFeedAdapter
 
 class MoodAdapter() : RecyclerView.Adapter<MoodAdapter.MoodViewHolder>() {
     var moods = mutableListOf<MoodData>()

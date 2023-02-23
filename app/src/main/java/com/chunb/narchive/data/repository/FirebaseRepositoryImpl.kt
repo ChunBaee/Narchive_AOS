@@ -10,4 +10,11 @@ class FirebaseRepositoryImpl @Inject constructor(private val firebaseSource: Fir
     override suspend fun uploadProfileToFirebase(path: Uri, downloadURL: MutableLiveData<String>) {
         firebaseSource.uploadProfileToFirebase(path, downloadURL)
     }
+
+    override suspend fun uploadWriteImageToFirebase(
+        imageList: List<String>,
+        downloadURL: MutableLiveData<MutableList<String>>
+    ) {
+        firebaseSource.uploadWriteImageToFirebase(imageList, downloadURL)
+    }
 }

@@ -13,12 +13,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.chunb.narchive.data.local.data.MoodData
+import com.chunb.narchive.data.remote.response.Book
+import com.chunb.narchive.data.remote.response.Movie
 import com.chunb.narchive.databinding.ActivityWriteBinding
 import com.chunb.narchive.databinding.ItemWriteSelectMoodsBinding
 import com.chunb.narchive.presentation.ui.search.view.SearchActivity
+import com.chunb.narchive.presentation.ui.write.adapter.BookMovieAdapter
 import com.chunb.narchive.presentation.ui.write.adapter.MoodAdapter
 import com.chunb.narchive.presentation.ui.write.adapter.WriteImageAdapter
 import com.chunb.narchive.presentation.ui.write.viewmodel.WriteViewModel
+import com.chunb.narchive.presentation.util.LoadingDialog
 import com.chunb.narchive.presentation.util.getCloseAnim
 import com.chunb.narchive.presentation.util.getOpenAnim
 import com.google.android.material.snackbar.Snackbar
@@ -29,8 +33,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class WriteActivity : AppCompatActivity() {
     private var isDrawerOpened = false
 
-    private lateinit var binding : ActivityWriteBinding
-    private val viewModel : WriteViewModel by viewModels()
+    private lateinit var binding: ActivityWriteBinding
+    private val viewModel: WriteViewModel by viewModels()
 
     private lateinit var popupWindow: PopupWindow
     private val popupAdapter by lazy {
@@ -39,9 +43,16 @@ class WriteActivity : AppCompatActivity() {
     private val writeImageAdapter by lazy {
         WriteImageAdapter()
     }
+    private val bookMovieAdapter by lazy {
+        BookMovieAdapter()
+    }
 
     private val popUpBinding by lazy {
         ItemWriteSelectMoodsBinding.inflate(layoutInflater)
+    }
+
+    private val loadingDialog by lazy {
+        LoadingDialog(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +60,11 @@ class WriteActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, com.chunb.narchive.R.layout.activity_write)
 
         initBinding()
-        initImageRv()
+        initAddedRv()
         observeMoods()
         observeImages()
+        observeBookMovie()
+        observeError()
     }
 
     private fun initBinding() {
@@ -101,15 +114,52 @@ class WriteActivity : AppCompatActivity() {
         }
     }
 
+    private fun observeError() {
+        viewModel.errorSnackBarMsg.observe(this) {
+            if(it.isNotEmpty()) {
+                Log.d("----", "observeError: $it")
+                Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun observeBookMovie() {
+        viewModel.selectBook.observe(this) {
+            Log.d("----", "observeBookMovie: ${bookMovieAdapter.mData}")
+
+            val checkBook = bookMovieAdapter.mData.indexOfFirst { t->  t.javaClass.name.contains("Book") }
+            Log.d("----", "observeBookMovie: $checkBook")
+            if (checkBook != -1) {
+                bookMovieAdapter.mData[checkBook] = it
+            } else {
+                bookMovieAdapter.mData.add(it)
+            }
+            bookMovieAdapter.notifyItemChanged(checkBook)
+        }
+
+        viewModel.selectMovie.observe(this) {
+            val checkMovie = bookMovieAdapter.mData.indexOfFirst { t->  t.javaClass.name.contains("Movie") }
+            Log.d("----", "observeBookMovie: $checkMovie")
+            if (checkMovie != -1) {
+                bookMovieAdapter.mData[checkMovie] = it
+            } else {
+                bookMovieAdapter.mData.add(it)
+            }
+            bookMovieAdapter.notifyItemChanged(checkMovie)
+        }
+    }
+
     private fun setCurrentMood(currentMood: MoodData) {
         viewModel.setChangedMood(currentMood)
     }
 
-    private fun initImageRv() {
+    private fun initAddedRv() {
         binding.writeLayoutAddedRvAddImages.adapter = writeImageAdapter
+        binding.writeLayoutAddedRvAddBookMovie.adapter = bookMovieAdapter
     }
 
     fun initOpenGallery() {
+        closeDrawer()
         val intent = Intent()
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
@@ -122,8 +172,9 @@ class WriteActivity : AppCompatActivity() {
             if (it.resultCode == Activity.RESULT_OK && it.data?.clipData != null) {
                 val clipData = it.data?.clipData!!
                 val maxClipDataSize = 4
-                if(clipData.itemCount > maxClipDataSize) {
-                    Snackbar.make(binding.root, "이미지는 4장까지 선택할 수 있어요!", Snackbar.LENGTH_SHORT).show()
+                if (clipData.itemCount > maxClipDataSize) {
+                    Snackbar.make(binding.root, "이미지는 4장까지 선택할 수 있어요!", Snackbar.LENGTH_SHORT)
+                        .show()
                 } else {
                     val clipDataList = mutableListOf<String>()
                     for (i in 0 until clipData.itemCount) {
@@ -136,16 +187,51 @@ class WriteActivity : AppCompatActivity() {
 
     fun onAddedDrawerVisibility() {
         isDrawerOpened = isDrawerOpened.not()
-        if(isDrawerOpened) {
+        if (isDrawerOpened) {
             getOpenAnim(binding.writeLayoutAddedThings).start()
         } else {
             getCloseAnim(binding.writeLayoutAddedThings).start()
         }
     }
-    fun openSearchActivity(type : Boolean) {
-        val searchIntent = Intent(this, SearchActivity::class.java)
-        searchIntent.putExtra("isBook", type)
-        startActivity(searchIntent)
+
+    private fun closeDrawer() {
+        isDrawerOpened = false
+        getCloseAnim(binding.writeLayoutAddedThings).start()
     }
 
+    fun openSearchActivity(type: Boolean) {
+        closeDrawer()
+        val searchIntent = Intent(this, SearchActivity::class.java)
+        searchIntent.putExtra("isBook", type)
+        activityResultLauncher.launch(searchIntent)
+    }
+
+    private val activityResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        {
+            Log.d("----", "${it.resultCode}")
+            if (it.resultCode == 1001) {
+                viewModel.setSelectBook(it.data?.getSerializableExtra("Book") as Book)
+            } else if (it.resultCode == 1002) {
+                viewModel.setSelectMovie(it.data?.getSerializableExtra("Movie") as Movie)
+            }
+        }
+
+    fun startUploading() {
+        loadingDialog.show()
+        viewModel.upLoad()
+
+        viewModel.downloadImageURL.observe(this) {
+            if(it.size == viewModel.selectedImage.value?.size) {
+                viewModel.uploadToRemote()
+            }
+        }
+
+        viewModel.postFeedStatusCode.observe(this) {
+            if(it == 1000) {
+                loadingDialog.dismiss()
+                finish()
+            }
+        }
+    }
 }

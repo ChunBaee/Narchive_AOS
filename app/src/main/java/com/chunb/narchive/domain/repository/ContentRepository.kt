@@ -3,6 +3,7 @@ package com.chunb.narchive.domain.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
+import com.chunb.narchive.data.remote.request.RequestPostContent
 import com.chunb.narchive.data.remote.response.Content
 import com.chunb.narchive.data.remote.response.ResponseFeed
 import kotlinx.coroutines.flow.Flow
@@ -15,4 +16,6 @@ interface ContentRepository {
     suspend fun getFeed(page : Int) : Result<List<ResponseFeed>>
 
     fun getFeedPagingData() : Flow<PagingData<ResponseFeed>>
+
+    suspend fun postFeed(body : RequestPostContent) : Result<Int>
 }

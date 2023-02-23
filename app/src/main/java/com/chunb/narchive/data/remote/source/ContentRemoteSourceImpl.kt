@@ -1,9 +1,11 @@
 package com.chunb.narchive.data.remote.source
 
+import com.chunb.narchive.data.remote.request.RequestPostContent
 import com.chunb.narchive.data.remote.response.Content
 import com.chunb.narchive.data.remote.response.ResponseFeed
 import com.chunb.narchive.data.remote.service.ContentService
 import com.chunb.narchive.data.source.ContentSource
+import com.chunb.narchive.presentation.util.BaseResponse
 import javax.inject.Inject
 
 class ContentRemoteSourceImpl @Inject constructor(private val contentService: ContentService):
@@ -23,4 +25,14 @@ class ContentRemoteSourceImpl @Inject constructor(private val contentService: Co
         }
         return Result.failure(IllegalArgumentException())
     }
+
+    override suspend fun postFeed(body: RequestPostContent): Result<Int> {
+        val feedRes = contentService.postFeed(body)
+        if (feedRes.isSuccessful) {
+            return Result.success(feedRes.body()?.code!!)
+        }
+        return Result.failure(IllegalArgumentException())
+    }
+
+
 }

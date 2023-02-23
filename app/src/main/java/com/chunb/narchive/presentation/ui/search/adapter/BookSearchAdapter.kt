@@ -1,33 +1,39 @@
 package com.chunb.narchive.presentation.ui.search.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.adapters.ViewStubBindingAdapter.setOnInflateListener
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.chunb.narchive.data.remote.response.Comment
-import com.chunb.narchive.data.remote.response.ResponseFeed
+import com.chunb.narchive.data.remote.response.Book
 import com.chunb.narchive.data.remote.response.ResultSearchBook
-import com.chunb.narchive.databinding.ItemFeedRvContentBinding
 import com.chunb.narchive.databinding.ItemFormBookBinding
-import com.chunb.narchive.databinding.ItemFormMovieBinding
 import com.chunb.narchive.domain.mapper.mapToBook
-import com.chunb.narchive.presentation.ui.main.feed.adapter.HomeFeedImageAdapter
 
 class BookSearchAdapter : PagingDataAdapter<ResultSearchBook, BookSearchAdapter.BookSearchViewHolder>(diffCallback) {
 
+    private lateinit var bookClickedListener: BookClickedListener
+
+    interface BookClickedListener {
+        fun bookClickedListener(view: View, item : Book)
+    }
+
+    fun bookClickedListener(clickListener: BookClickedListener) {
+        this.bookClickedListener = clickListener
+    }
     inner class BookSearchViewHolder(private val binding : ItemFormBookBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : ResultSearchBook) {
-            Log.d("----", "bind: $item")
             binding.bookData = item.mapToBook()
         }
     }
 
     override fun onBindViewHolder(holder: BookSearchViewHolder, position: Int) {
-        Log.d("----", "onBindViewHolder: ${itemCount}")
         getItem(position)?.let { holder.bind(it) }
+
+        holder.itemView.setOnClickListener {
+            bookClickedListener.bookClickedListener(it, getItem(position)!!.mapToBook())
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookSearchViewHolder {

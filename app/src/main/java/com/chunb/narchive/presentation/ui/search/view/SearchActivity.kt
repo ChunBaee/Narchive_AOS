@@ -1,17 +1,22 @@
 package com.chunb.narchive.presentation.ui.search.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.chunb.narchive.R
+import com.chunb.narchive.data.remote.response.Book
+import com.chunb.narchive.data.remote.response.Movie
 import com.chunb.narchive.databinding.ActivitySearchBinding
 import com.chunb.narchive.presentation.ui.search.adapter.BookSearchAdapter
 import com.chunb.narchive.presentation.ui.search.adapter.MovieSearchAdapter
 import com.chunb.narchive.presentation.ui.search.viewmodel.SearchViewModel
+import com.chunb.narchive.presentation.ui.write.view.WriteActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -51,8 +56,22 @@ class SearchActivity : AppCompatActivity() {
     private fun initSearchRv() {
         if (viewModel.searchType.value == true) {
             binding.searchRvBook.adapter = bookSearchAdapter
+            bookSearchAdapter.bookClickedListener(object : BookSearchAdapter.BookClickedListener {
+                override fun bookClickedListener(view: View, item: Book) {
+                    viewModel.setSelectBook(item)
+                    setBookDataToWrite(true)
+                }
+
+            })
         } else {
             binding.searchRvBook.adapter = movieSearchAdapter
+            movieSearchAdapter.movieClickedListener(object : MovieSearchAdapter.MovieClickedListener {
+                override fun movieClickedListener(view: View, item: Movie) {
+                    viewModel.setSelectMovie(item)
+                    setBookDataToWrite(false)
+                }
+
+            })
         }
     }
 
@@ -72,7 +91,6 @@ class SearchActivity : AppCompatActivity() {
     private fun observeBookData() {
         lifecycleScope.launch {
             viewModel.getBookList().collectLatest {
-                Log.d("----", "observeBookData: $it")
                 bookSearchAdapter.submitData(it)
             }
         }
@@ -84,6 +102,19 @@ class SearchActivity : AppCompatActivity() {
                 movieSearchAdapter.submitData(it)
             }
         }
+    }
+
+    private fun setBookDataToWrite(isBook : Boolean) {
+        val intent = Intent(this, WriteActivity::class.java)
+        val RESULT_CODE = if(isBook) {
+            intent.putExtra("Book", viewModel.selectBook.value)
+            1001
+        } else {
+            intent.putExtra("Movie", viewModel.selectMovie.value)
+            1002
+        }
+        this.setResult(RESULT_CODE, intent)
+        finish()
     }
 
 }

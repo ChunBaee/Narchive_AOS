@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.chunb.narchive.data.remote.response.Book
+import com.chunb.narchive.data.remote.response.Movie
 import com.chunb.narchive.data.remote.response.ResultSearchBook
 import com.chunb.narchive.data.remote.response.ResultSearchMovie
 import com.chunb.narchive.domain.repository.SearchRepository
@@ -30,6 +32,12 @@ class SearchViewModel @Inject constructor(
 
     val targetWord = MutableLiveData<String>().apply { value }
 
+    private val _selectBook = MutableLiveData<Book>()
+    val selectBook : LiveData<Book> = _selectBook
+
+    private val _selectMovie = MutableLiveData<Movie>()
+    val selectMovie : LiveData<Movie> = _selectMovie
+
     fun setSearchType(type: Boolean) {
         _searchType.value = type
         setSearchViewTitle()
@@ -45,6 +53,14 @@ class SearchViewModel @Inject constructor(
 
     fun getMovieList() : Flow<PagingData<ResultSearchMovie>> {
         return searchRepository.naverMovieSearch(targetWord.value.orEmpty()).cachedIn(viewModelScope)
+    }
+
+    fun setSelectBook(select : Book) {
+        _selectBook.value = select
+    }
+
+    fun setSelectMovie(select : Movie) {
+        _selectMovie.value = select
     }
 
 

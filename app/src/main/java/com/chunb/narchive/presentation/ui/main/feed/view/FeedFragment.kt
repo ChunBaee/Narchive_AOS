@@ -2,7 +2,6 @@ package com.chunb.narchive.presentation.ui.main.feed.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import com.chunb.narchive.R
 import com.chunb.narchive.databinding.FragmentFeedBinding
 import com.chunb.narchive.presentation.ui.main.feed.adapter.FeedListAdapter
-import com.chunb.narchive.presentation.ui.main.feed.adapter.HomeFeedAdapter
 import com.chunb.narchive.presentation.ui.main.viewmodel.MainViewModel
 import com.chunb.narchive.presentation.ui.write.view.WriteActivity
 import com.chunb.narchive.presentation.util.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.NonDisposableHandle.parent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

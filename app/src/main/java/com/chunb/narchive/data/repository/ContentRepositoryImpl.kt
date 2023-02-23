@@ -7,6 +7,7 @@ import androidx.lifecycle.asLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.chunb.narchive.data.remote.request.RequestPostContent
 import com.chunb.narchive.data.remote.response.Content
 import com.chunb.narchive.data.remote.response.ResponseFeed
 import com.chunb.narchive.data.remote.service.ContentService
@@ -32,5 +33,9 @@ class ContentRepositoryImpl @Inject constructor(private val contentRemoteSource:
         return Pager(PagingConfig(pageSize = 10)) {
             FeedPagingSource(Dispatchers.IO, contentService)
         }.flow
+    }
+
+    override suspend fun postFeed(body : RequestPostContent): Result<Int> {
+        return contentRemoteSource.postFeed(body)
     }
 }
