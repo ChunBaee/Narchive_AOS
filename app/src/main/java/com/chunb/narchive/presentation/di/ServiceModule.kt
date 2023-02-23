@@ -1,5 +1,6 @@
 package com.chunb.narchive.presentation.di
 
+import com.chunb.nachive.data.remote.api.search.SearchNaverService
 import com.chunb.narchive.data.remote.service.AuthService
 import com.chunb.narchive.data.remote.service.BookService
 import com.chunb.narchive.data.remote.service.CommentService
@@ -13,6 +14,7 @@ import com.chunb.narchive.data.remote.service.UserService
 import com.chunb.narchive.presentation.di.annotation.KakaoAuthRetrofit
 import com.chunb.narchive.presentation.di.annotation.KakaoRetrofit
 import com.chunb.narchive.presentation.di.annotation.NarchiveRetrofit
+import com.chunb.narchive.presentation.di.annotation.NaverRetrofit
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -64,4 +66,8 @@ class ServiceModule {
     @Provides
     @Singleton
     fun provideSearchKakaoService(@KakaoRetrofit retrofit : Retrofit) : SearchKakaoService = retrofit.create(SearchKakaoService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSeachNaverService(@NaverRetrofit retrofit: Retrofit) : SearchNaverService = retrofit.create(SearchNaverService::class.java)
 }

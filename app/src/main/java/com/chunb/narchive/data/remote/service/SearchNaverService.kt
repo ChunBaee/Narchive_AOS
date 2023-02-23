@@ -12,6 +12,6 @@ interface SearchNaverService {
         @Header("X-Naver-Client-Id") ClientId : String,
         @Header("X-Naver-Client-Secret") Secret : String,
         @Query("query", encoded = true) query : String,
-        @Query("page") page : Int
+        @Query("start") start : Int
     ) : Response<ResponseSearchMovie>
 }

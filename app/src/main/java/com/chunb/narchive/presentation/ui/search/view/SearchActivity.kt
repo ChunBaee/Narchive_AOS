@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.chunb.narchive.R
 import com.chunb.narchive.databinding.ActivitySearchBinding
 import com.chunb.narchive.presentation.ui.search.adapter.BookSearchAdapter
+import com.chunb.narchive.presentation.ui.search.adapter.MovieSearchAdapter
 import com.chunb.narchive.presentation.ui.search.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -21,6 +22,9 @@ class SearchActivity : AppCompatActivity() {
     private val viewModel: SearchViewModel by viewModels()
     private val bookSearchAdapter by lazy {
         BookSearchAdapter()
+    }
+    private val movieSearchAdapter by lazy {
+        MovieSearchAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +51,8 @@ class SearchActivity : AppCompatActivity() {
     private fun initSearchRv() {
         if (viewModel.searchType.value == true) {
             binding.searchRvBook.adapter = bookSearchAdapter
+        } else {
+            binding.searchRvBook.adapter = movieSearchAdapter
         }
     }
 
@@ -58,6 +64,8 @@ class SearchActivity : AppCompatActivity() {
         binding.searchRvBook.scrollToPosition(0)
         if(viewModel.searchType.value == true) {
             observeBookData()
+        } else {
+            observeMovieData()
         }
     }
 
@@ -66,6 +74,14 @@ class SearchActivity : AppCompatActivity() {
             viewModel.getBookList().collectLatest {
                 Log.d("----", "observeBookData: $it")
                 bookSearchAdapter.submitData(it)
+            }
+        }
+    }
+
+    private fun observeMovieData() {
+        lifecycleScope.launch {
+            viewModel.getMovieList().collectLatest {
+                movieSearchAdapter.submitData(it)
             }
         }
     }

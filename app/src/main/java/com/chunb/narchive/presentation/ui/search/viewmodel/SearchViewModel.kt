@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.chunb.narchive.data.remote.response.ResultSearchBook
+import com.chunb.narchive.data.remote.response.ResultSearchMovie
 import com.chunb.narchive.domain.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -29,8 +30,6 @@ class SearchViewModel @Inject constructor(
 
     val targetWord = MutableLiveData<String>().apply { value }
 
-    var bookData = flowOf<PagingData<ResultSearchBook>>()
-
     fun setSearchType(type: Boolean) {
         _searchType.value = type
         setSearchViewTitle()
@@ -41,8 +40,11 @@ class SearchViewModel @Inject constructor(
     }
 
     fun getBookList() : Flow<PagingData<ResultSearchBook>>{
-        Log.d("----", "getBookList: ${targetWord.value}")
         return searchRepository.kakaoBookSearch(targetWord.value.orEmpty()).cachedIn(viewModelScope)
+    }
+
+    fun getMovieList() : Flow<PagingData<ResultSearchMovie>> {
+        return searchRepository.naverMovieSearch(targetWord.value.orEmpty()).cachedIn(viewModelScope)
     }
 
 
