@@ -1,6 +1,6 @@
 package com.chunb.narchive.presentation.di
 
-import com.chunb.nachive.data.remote.api.search.SearchNaverService
+import com.chunb.narchive.data.remote.service.SearchNaverService
 import com.chunb.narchive.data.remote.service.AuthService
 import com.chunb.narchive.data.remote.service.BookService
 import com.chunb.narchive.data.remote.service.CommentService
@@ -20,7 +20,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -69,5 +68,6 @@ class ServiceModule {
 
     @Provides
     @Singleton
-    fun provideSeachNaverService(@NaverRetrofit retrofit: Retrofit) : SearchNaverService = retrofit.create(SearchNaverService::class.java)
+    fun provideSeachNaverService(@NaverRetrofit retrofit: Retrofit) : SearchNaverService = retrofit.create(
+        SearchNaverService::class.java)
 }

@@ -3,7 +3,7 @@ package com.chunb.narchive.data.remote.source.paging
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.chunb.nachive.data.remote.api.search.SearchNaverService
+import com.chunb.narchive.data.remote.service.SearchNaverService
 import com.chunb.narchive.data.remote.response.ResultSearchMovie
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

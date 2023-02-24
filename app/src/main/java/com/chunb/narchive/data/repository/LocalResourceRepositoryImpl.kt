@@ -14,4 +14,8 @@ class LocalResourceRepositoryImpl @Inject constructor(private val localResourceS
     override suspend fun getMoodsData(): List<MoodData> {
         return localResourceSource.getMoodsData()
     }
+
+    override fun getTodayDate(): String {
+        return localResourceSource.getTodayDate()
+    }
 }

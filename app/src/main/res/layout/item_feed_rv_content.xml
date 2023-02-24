@@ -155,79 +155,40 @@
                 app:layout_constraintStart_toStartOf="@id/item_main_rv_contents_tv_content"
                 app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_layout_include_movie">
 
-                <TextView
-                    android:id="@+id/item_main_rv_comments_txt_add_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_add_comment"
-                    android:textColor="@color/color_d9d9d9"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <View
                     android:id="@+id/item_main_rv_contents_view_comment_divider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="7dp"
                     android:background="@color/color_dddddd"
-                    app:layout_constraintTop_toBottomOf="@id/item_main_rv_comments_txt_add_comment" />
-
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginEnd="7dp"
-                    android:layout_marginBottom="7dp"
-                    android:src="@drawable/ic_main_contents_comment_enter"
-                    app:layout_constraintBottom_toBottomOf="@id/item_main_rv_contents_view_comment_divider"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/item_main_rv_contents_txt_last_comment_nickname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:text="@{comment.nickName}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_view_comment_divider" />
-
-                <TextView
-                    android:id="@+id/item_main_rv_contents_txt_last_comment_comment"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    android:text="@{comment.content}"
-                    app:layout_constraintBottom_toBottomOf="@id/item_main_rv_contents_txt_last_comment_nickname"
-                    app:layout_constraintEnd_toStartOf="@id/item_main_rv_comments_txt_count_comment"
-                    app:layout_constraintStart_toEndOf="@id/item_main_rv_contents_txt_last_comment_nickname"
-                    app:layout_constraintTop_toTopOf="@id/item_main_rv_contents_txt_last_comment_nickname" />
+                <ImageView
+                    android:id="@+id/show_book"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_write_open_book"
+                    app:tint="@color/selector_write_additional_clicked"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
 
                 <ImageView
                     android:id="@+id/item_main_rv_comments_btn_count_comment"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
                     android:src="@drawable/ic_main_comment_count"
-                    app:layout_constraintBottom_toBottomOf="@id/item_main_rv_contents_txt_last_comment_nickname"
+                    android:layout_marginTop="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/item_main_rv_contents_txt_last_comment_nickname" />
+                    app:layout_constraintTop_toBottomOf="@+id/item_main_rv_contents_view_comment_divider" />
 
                 <TextView
                     android:id="@+id/item_main_rv_comments_txt_count_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="3dp"
-                    android:textColor="@color/color_d9d9d9"
-                    android:textSize="12sp"
+                    android:layout_marginEnd="5dp"
+                    android:textColor="@color/color_9da1a6"
+                    android:textSize="15sp"
                     android:text="@{String.valueOf(content.content.commentCount)}"
                     app:layout_constraintBottom_toBottomOf="@id/item_main_rv_comments_btn_count_comment"
                     app:layout_constraintEnd_toStartOf="@id/item_main_rv_comments_btn_count_comment"

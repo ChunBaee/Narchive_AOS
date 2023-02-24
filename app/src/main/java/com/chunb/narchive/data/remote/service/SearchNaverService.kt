@@ -1,4 +1,4 @@
-package com.chunb.nachive.data.remote.api.search
+package com.chunb.narchive.data.remote.service
 
 import com.chunb.narchive.data.remote.response.ResponseSearchMovie
 import retrofit2.Response

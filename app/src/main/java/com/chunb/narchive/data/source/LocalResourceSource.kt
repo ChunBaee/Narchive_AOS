@@ -8,4 +8,6 @@ interface LocalResourceSource {
     suspend fun getOnBindingData() : List<OnBoardingData>
 
     suspend fun getMoodsData() : List<MoodData>
+
+    fun getTodayDate() : String
 }

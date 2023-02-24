@@ -2,6 +2,7 @@ package com.chunb.narchive.presentation.ui.main.feed.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.chunb.narchive.R
+import com.chunb.narchive.data.remote.response.Image
 import com.chunb.narchive.databinding.FragmentFeedBinding
 import com.chunb.narchive.presentation.ui.main.feed.adapter.FeedListAdapter
+import com.chunb.narchive.presentation.ui.main.feed.adapter.HomeFeedImageAdapter
 import com.chunb.narchive.presentation.ui.main.viewmodel.MainViewModel
 import com.chunb.narchive.presentation.ui.write.view.WriteActivity
 import com.chunb.narchive.presentation.util.LoadingDialog
@@ -20,18 +23,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.log
 
 @AndroidEntryPoint
 class FeedFragment : Fragment() {
     private lateinit var binding: FragmentFeedBinding
     private val viewModel: MainViewModel by viewModels()
-    private val feedAdapter by lazy {
-        //HomeFeedAdapter()
-        FeedListAdapter()
-    }
     private val loadingDialog by lazy {
         LoadingDialog(requireActivity())
     }
+    private lateinit var feedAdapter : FeedListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,7 +60,9 @@ class FeedFragment : Fragment() {
     }
 
     private fun initFeed() {
+        feedAdapter = FeedListAdapter(::openDetailFeedFragment)
         binding.fgMainRvContents.adapter = feedAdapter
+
     }
 
     private fun observeFeed() {
@@ -77,6 +80,10 @@ class FeedFragment : Fragment() {
 
     fun openWrite() {
         startActivity(Intent(requireActivity(), WriteActivity::class.java))
+    }
+
+    private fun openDetailFeedFragment(position : Int) {
+        Log.d("----", "openDetailFeedFragment: $position")
     }
 
 }

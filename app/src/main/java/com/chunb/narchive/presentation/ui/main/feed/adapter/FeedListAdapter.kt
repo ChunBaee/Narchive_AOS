@@ -1,23 +1,35 @@
 package com.chunb.narchive.presentation.ui.main.feed.adapter
 
+import android.provider.MediaStore.Images
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.adapters.ViewStubBindingAdapter.setOnInflateListener
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.chunb.narchive.data.data.Mood
+import com.chunb.narchive.data.remote.response.Book
 import com.chunb.narchive.data.remote.response.Comment
+import com.chunb.narchive.data.remote.response.Image
 import com.chunb.narchive.data.remote.response.ResponseFeed
 import com.chunb.narchive.databinding.ItemFeedRvContentBinding
 import com.chunb.narchive.databinding.ItemFormBookBinding
 import com.chunb.narchive.databinding.ItemFormMovieBinding
+import com.chunb.narchive.presentation.ui.search.adapter.BookSearchAdapter
 
-class FeedListAdapter() : PagingDataAdapter<ResponseFeed, FeedListAdapter.FeedViewHolder>(diffCallback) {
+class FeedListAdapter(private val onFeedClick : (Int) -> Unit) :
+    PagingDataAdapter<ResponseFeed, FeedListAdapter.FeedViewHolder>(diffCallback) {
 
-    inner class FeedViewHolder(private val binding : ItemFeedRvContentBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : ResponseFeed) {
+    private var imageStrList = mutableListOf<String>()
+
+    inner class FeedViewHolder(val binding: ItemFeedRvContentBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: ResponseFeed) {
+            Log.d("----", "bind: $item")
+
             binding.content = item
 
             binding.comment = if (item.comments?.isNotEmpty() == true) {
@@ -32,42 +44,67 @@ class FeedListAdapter() : PagingDataAdapter<ResponseFeed, FeedListAdapter.FeedVi
             /*binding.itemMainRvContentsBtnComment.setOnClickListener {
                 commentClickedListener.commentClickedListener(it, item.content.contentIdx)
             }*/
+            var bookBinding : ItemFormBookBinding? = null
+            var movieBinding : ItemFormMovieBinding? = null
 
             if (item.book?.isNotEmpty() == true) {
                 binding.itemMainRvContentsLayoutBook.apply {
                     setOnInflateListener { _, _ ->
-                        val bookBinding = this.binding as ItemFormBookBinding
-                        bookBinding.bookData = item.book[0]
+                        bookBinding = this.binding as ItemFormBookBinding
+                        bookBinding!!.bookData = item.book[0]
                     }
                 }
                 binding.itemMainRvContentsLayoutBook.viewStub?.inflate()
+
+            } else {
+                bookBinding?.root?.visibility = View.GONE
+                binding.itemMainRvContentsLayoutBook.viewStub?.visibility = View.GONE
+                binding.itemMainRvContentsLayoutBook.binding?.root?.visibility = View.GONE
             }
+
             if (item.movie?.isNotEmpty() == true) {
                 binding.itemMainRvContentsLayoutMovie.apply {
                     setOnInflateListener { _, _ ->
-                        val movieBinding = this.binding as ItemFormMovieBinding
-                        movieBinding.movieData = item.movie[0]
+                        movieBinding = this.binding as ItemFormMovieBinding
+                        movieBinding!!.movieData = item.movie[0]
                     }
                 }
                 binding.itemMainRvContentsLayoutMovie.viewStub?.inflate()
+
+            } else {
+                movieBinding?.root?.visibility = View.GONE
+                binding.itemMainRvContentsLayoutMovie.viewStub?.visibility = View.GONE
+                binding.itemMainRvContentsLayoutMovie.binding?.root?.visibility = View.GONE
+            }
+            lateinit var homeFeedImageAdapter : HomeFeedImageAdapter
+            if (!item.images.isNullOrEmpty()) {
+                homeFeedImageAdapter = HomeFeedImageAdapter(item.images.toMutableList())
+                binding.itemMainRvContentsRvImages.visibility = View.VISIBLE
+                binding.itemMainRvContentsRvImages.adapter = homeFeedImageAdapter
+            } else {
+                binding.itemMainRvContentsRvImages.visibility = View.GONE
             }
 
-            Log.d("0000", "bind: ${item.images}")
-
-            if (!item.images.isNullOrEmpty()) {
-                binding.itemMainRvContentsRvImages.adapter =
-                    HomeFeedImageAdapter(item.images.toMutableList())
+            binding.showBook.setOnClickListener {
+                it.isEnabled = it.isEnabled.not()
             }
         }
-
     }
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
+
+        holder.itemView.setOnClickListener { onFeedClick(position) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
-        return FeedViewHolder(ItemFeedRvContentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return FeedViewHolder(
+            ItemFeedRvContentBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
 

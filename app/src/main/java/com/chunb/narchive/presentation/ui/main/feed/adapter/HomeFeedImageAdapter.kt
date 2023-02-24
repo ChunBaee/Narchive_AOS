@@ -1,6 +1,8 @@
 package com.chunb.narchive.presentation.ui.main.feed.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.chunb.narchive.data.remote.response.Image

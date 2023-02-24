@@ -4,6 +4,9 @@ import com.chunb.narchive.R
 import com.chunb.narchive.data.local.data.MoodData
 import com.chunb.narchive.data.local.data.OnBoardingData
 import com.chunb.narchive.data.source.LocalResourceSource
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class LocalResourceSourceImpl : LocalResourceSource {
 
@@ -26,6 +29,10 @@ class LocalResourceSourceImpl : LocalResourceSource {
             MoodData(Pair("smile", R.drawable.ic_smile_face)),
             MoodData(Pair("sunglass", R.drawable.ic_sunglass_face))
         )
+
+    override fun getTodayDate(): String {
+        return SimpleDateFormat("yyyy.MM.dd", Locale.KOREA).format(Date(System.currentTimeMillis())).toString()
+    }
 
 
 }

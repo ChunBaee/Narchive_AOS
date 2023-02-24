@@ -22,6 +22,7 @@ class WriteViewModel @Inject constructor(
     private val firebaseRepository: FirebaseRepository,
     private val contentRepository: ContentRepository
 ) : ViewModel() {
+
     private val _moodData = MutableLiveData<MutableList<MoodData>>()
     val moodData: LiveData<MutableList<MoodData>> = _moodData
 
@@ -46,6 +47,10 @@ class WriteViewModel @Inject constructor(
 
     private val _postFeedStatusCode = MutableLiveData<Int>()
     val postFeedStatusCode : LiveData<Int> = _postFeedStatusCode
+
+    fun getTodayDate() : String {
+            return localResourceRepository.getTodayDate()
+    }
     fun getMoodData() {
         viewModelScope.launch {
             _moodData.value = localResourceRepository.getMoodsData() as MutableList
