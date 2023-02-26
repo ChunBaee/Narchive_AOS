@@ -12,6 +12,10 @@
             type="com.chunb.narchive.data.remote.response.Comment" />
 
         <variable
+            name="feed"
+            type="com.chunb.narchive.data.remote.response.Feed" />
+
+        <variable
             name="mood"
             type="Integer" />
     </data>
@@ -43,7 +47,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                setCircleImage="@{content.user.userProfileImage}"
+                setCircleImage="@{feed.user.userProfileImage}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@{content.user.userNickName}"
+                android:text="@{feed.user.userNickName}"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -73,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="@{content.content.updatedAt}"
+                android:text="@{feed.updatedAt}"
                 android:textColor="@color/color_bdbdbd"
                 android:textSize="11sp"
                 app:layout_constraintStart_toStartOf="@id/item_main_rv_contents_tv_nickname"
@@ -89,7 +93,7 @@
                 android:lineHeight="20dp"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-                android:text="@{content.content.content}"
+                android:text="@{feed.content}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@+id/item_main_rv_contents_iv_profile"
@@ -168,6 +172,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_write_open_book"
+                    android:enabled="@{feed.bookExists}"
                     app:tint="@color/selector_write_additional_clicked"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
@@ -189,7 +194,7 @@
                     android:layout_marginEnd="5dp"
                     android:textColor="@color/color_9da1a6"
                     android:textSize="15sp"
-                    android:text="@{String.valueOf(content.content.commentCount)}"
+                    android:text="@{String.valueOf(feed.commentCount)}"
                     app:layout_constraintBottom_toBottomOf="@id/item_main_rv_comments_btn_count_comment"
                     app:layout_constraintEnd_toStartOf="@id/item_main_rv_comments_btn_count_comment"
                     app:layout_constraintTop_toTopOf="@id/item_main_rv_comments_btn_count_comment" />
