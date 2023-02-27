@@ -14,9 +14,9 @@ interface ContentRepository {
 
     suspend fun getContents(query : String?) : Result<List<Content>>
 
-    suspend fun getFeed(page : Int) : Result<List<Feed>>
-
     fun getFeedPagingData() : Flow<PagingData<Feed>>
 
     suspend fun postFeed(body : RequestPostContent) : Result<Int>
+
+    suspend fun getDetailContent(contentId : Int) : Result<Content>
 }

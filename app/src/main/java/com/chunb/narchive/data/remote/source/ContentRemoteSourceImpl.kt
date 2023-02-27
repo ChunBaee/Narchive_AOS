@@ -18,18 +18,18 @@ class ContentRemoteSourceImpl @Inject constructor(private val contentService: Co
         return Result.failure(IllegalArgumentException())
     }
 
-    override suspend fun getFeed(page: Int): Result<List<ResponseFeed>> {
-        val feedRes = contentService.getFeed(page)
-        if(feedRes.isSuccessful) {
-            return Result.success(feedRes.body().orEmpty())
-        }
-        return Result.failure(IllegalArgumentException())
-    }
-
     override suspend fun postFeed(body: RequestPostContent): Result<Int> {
         val feedRes = contentService.postFeed(body)
         if (feedRes.isSuccessful) {
             return Result.success(feedRes.body()?.code!!)
+        }
+        return Result.failure(IllegalArgumentException())
+    }
+
+    override suspend fun getDetailContent(contentId: Int): Result<Content> {
+        val contentDetailRes = contentService.getContentDetail(contentId)
+        if(contentDetailRes.isSuccessful) {
+            return Result.success(contentDetailRes.body()!!)
         }
         return Result.failure(IllegalArgumentException())
     }

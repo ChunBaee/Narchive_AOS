@@ -9,6 +9,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ContentService {
@@ -19,7 +20,7 @@ interface ContentService {
     ) : Response<List<Content>>
 
 
-    @GET("/contents")
+    @GET("/contents/feed")
     suspend fun getFeed(
         @Query("page") page : Int
     ) : Response<List<Feed>>
@@ -28,4 +29,9 @@ interface ContentService {
     suspend fun postFeed(
         @Body body : RequestPostContent
     ) : Response<BaseResponse>
+
+    @GET("/contents/feed/{contentId}")
+    suspend fun getContentDetail(
+        @Path("contentId") contentId : Int
+    ) : Response<Content>
 }

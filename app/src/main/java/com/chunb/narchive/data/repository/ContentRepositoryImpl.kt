@@ -26,10 +26,6 @@ class ContentRepositoryImpl @Inject constructor(private val contentRemoteSource:
         return contentRemoteSource.getContents(query)
     }
 
-    override suspend fun getFeed(page: Int): Result<List<Feed>> {
-        return contentRemoteSource.getFeed(page)
-    }
-
     override fun getFeedPagingData(): Flow<PagingData<Feed>> {
         return Pager(PagingConfig(pageSize = 10)) {
             FeedPagingSource(Dispatchers.IO, contentService)
@@ -38,5 +34,9 @@ class ContentRepositoryImpl @Inject constructor(private val contentRemoteSource:
 
     override suspend fun postFeed(body : RequestPostContent): Result<Int> {
         return contentRemoteSource.postFeed(body)
+    }
+
+    override suspend fun getDetailContent(contentId: Int): Result<Content> {
+        return contentRemoteSource.getDetailContent(contentId)
     }
 }

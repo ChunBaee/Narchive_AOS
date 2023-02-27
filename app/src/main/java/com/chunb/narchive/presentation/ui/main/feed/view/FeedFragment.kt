@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.chunb.narchive.R
 import com.chunb.narchive.data.remote.response.Image
 import com.chunb.narchive.databinding.FragmentFeedBinding
+import com.chunb.narchive.presentation.ui.detail.view.DetailActivity
 import com.chunb.narchive.presentation.ui.main.feed.adapter.FeedListAdapter
 import com.chunb.narchive.presentation.ui.main.feed.adapter.HomeFeedImageAdapter
 import com.chunb.narchive.presentation.ui.main.viewmodel.MainViewModel
@@ -84,6 +85,9 @@ class FeedFragment : Fragment() {
 
     private fun openDetailFeedFragment(position : Int) {
         Log.d("----", "openDetailFeedFragment: $position")
+        val intent = Intent(requireActivity(), DetailActivity::class.java)
+        intent.putExtra("contentIdx", position)
+        startActivity(intent)
     }
 
 }

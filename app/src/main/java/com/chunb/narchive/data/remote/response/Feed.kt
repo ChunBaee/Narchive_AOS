@@ -1,6 +1,7 @@
 package com.chunb.narchive.data.remote.response
 
 data class Feed (
+    val contentIdx : Int,
     val user : User,
     val updatedAt : String,
     val commentCount : Int,

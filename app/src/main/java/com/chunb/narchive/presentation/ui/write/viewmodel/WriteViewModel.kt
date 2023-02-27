@@ -1,5 +1,6 @@
 package com.chunb.narchive.presentation.ui.write.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -90,6 +91,7 @@ class WriteViewModel @Inject constructor(
 
     fun uploadToRemote() {
         viewModelScope.launch {
+            Log.d("----", "uploadToRemote: ${selectBook.value}, ${selectMovie.value}")
             contentRepository.postFeed(
                 currentContent.value!!.mapToFeedData(
                     currentMood.value!!.moods.first,

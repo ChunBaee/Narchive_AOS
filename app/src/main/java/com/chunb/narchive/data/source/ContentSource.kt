@@ -11,8 +11,7 @@ import com.chunb.narchive.presentation.util.BaseResponse
 interface ContentSource {
 
     suspend fun getContents(query : String?) : Result<List<Content>>
-
-    suspend fun getFeed(page : Int) : Result<List<Feed>>
-
     suspend fun postFeed(body : RequestPostContent) : Result<Int>
+
+    suspend fun getDetailContent(contentId : Int) : Result<Content>
 }

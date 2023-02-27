@@ -228,8 +228,9 @@ class WriteActivity : AppCompatActivity() {
         }
 
         viewModel.postFeedStatusCode.observe(this) {
-            if(it == 200) {
+            if(it == 1000) {
                 loadingDialog.dismiss()
+                finishWrite()
 
             }
         }

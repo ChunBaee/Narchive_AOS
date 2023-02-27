@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.chunb.narchive.data.remote.response.Feed
 import com.chunb.narchive.data.remote.response.ResponseFeed
 import com.chunb.narchive.domain.data.Contents
 import com.chunb.narchive.domain.repository.ContentRepository
@@ -25,7 +26,7 @@ class MainViewModel @Inject constructor(
     private var _homeFeedData = MutableLiveData<PagingData<ResponseFeed>>()
     val homeFeedData: LiveData<PagingData<ResponseFeed>> = _homeFeedData
 
-    fun getFeedData() : Flow<PagingData<ResponseFeed>> {
+    fun getFeedData() : Flow<PagingData<Feed>> {
         return contentRepository.getFeedPagingData().cachedIn(viewModelScope)
     }
 }

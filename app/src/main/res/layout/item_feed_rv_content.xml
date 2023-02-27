@@ -76,10 +76,9 @@
                 android:id="@+id/item_main_rv_contents_tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
                 android:text="@{feed.updatedAt}"
                 android:textColor="@color/color_bdbdbd"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/item_main_rv_contents_tv_nickname"
                 app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_tv_nickname"
                 app:layout_constraintBottom_toBottomOf="@id/item_main_rv_contents_iv_profile"/>
@@ -99,56 +98,6 @@
                 app:layout_constraintStart_toStartOf="@+id/item_main_rv_contents_iv_profile"
                 app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_iv_profile" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/item_main_rv_contents_rv_images"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="@id/item_main_rv_contents_tv_content"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="@+id/item_main_rv_contents_iv_profile"
-                app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_tv_content" />
-
-            <LinearLayout
-                android:id="@+id/item_main_rv_contents_layout_include_book"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_card_4_f7f8f9"
-                app:layout_constraintEnd_toEndOf="@id/item_main_rv_contents_tv_content"
-                app:layout_constraintStart_toStartOf="@id/item_main_rv_contents_tv_content"
-                app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_rv_images">
-
-                <ViewStub
-                    android:id="@+id/item_main_rv_contents_layout_book"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inflatedId="@+id/item_main_rv_contents_layout_book_inflated"
-                    android:layout="@layout/item_form_book" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/item_main_rv_contents_layout_include_movie"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_card_4_f7f8f9"
-                app:layout_constraintEnd_toEndOf="@id/item_main_rv_contents_tv_content"
-                app:layout_constraintStart_toStartOf="@id/item_main_rv_contents_tv_content"
-                app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_layout_include_book">
-
-                <ViewStub
-                    android:id="@+id/item_main_rv_contents_layout_movie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inflatedId="@+id/item_main_rv_contents_layout_movie_inflated"
-                    android:layout="@layout/item_form_movie" />
-
-            </LinearLayout>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/item_main_rv_contents_btn_comment"
                 android:layout_width="0dp"
@@ -157,7 +106,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/item_main_rv_contents_tv_content"
                 app:layout_constraintStart_toStartOf="@id/item_main_rv_contents_tv_content"
-                app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_layout_include_movie">
+                app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_tv_content">
 
 
                 <View
@@ -176,6 +125,32 @@
                     app:tint="@color/selector_write_additional_clicked"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/show_movie"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_write_open_movie"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="1dp"
+                    android:enabled="@{feed.movieExists}"
+                    app:tint="@color/selector_write_additional_clicked"
+                    app:layout_constraintTop_toTopOf="@id/show_book"
+                    app:layout_constraintBottom_toBottomOf="@id/show_book"
+                    app:layout_constraintStart_toEndOf="@id/show_book" />
+
+                <ImageView
+                    android:id="@+id/show_gallery"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_write_open_gallery"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="0.5dp"
+                    android:enabled="@{feed.imageCount != 0}"
+                    app:tint="@color/selector_write_additional_clicked"
+                    app:layout_constraintTop_toTopOf="@id/show_book"
+                    app:layout_constraintBottom_toBottomOf="@id/show_book"
+                    app:layout_constraintStart_toEndOf="@id/show_movie" />
 
 
                 <ImageView
@@ -202,6 +177,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

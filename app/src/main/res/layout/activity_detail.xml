@@ -1,10 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="activity"
+            type="com.chunb.narchive.presentation.ui.detail.view.DetailActivity" />
+
+        <variable
+            name="content"
+            type="com.chunb.narchive.data.remote.response.Content" />
+
+        <variable
+            name="mood"
+            type="Integer" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/color_b2f0f4"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_common_x"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/detail_title(content.updatedAt)}"
+                android:textColor="@color/white"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2022.01.01 의 기록" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/detail_btn_drawer_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="mini"
+            android:src="@drawable/ic_write_open_book"
+            android:alpha="0.5"
+            app:tint="@color/color_b2f0f4"
+            android:background="@drawable/bg_card_4_f7f8f9"
+            app:backgroundTint="@color/white"
+            app:shapeAppearanceOverlay="?attr/shapeAppearanceMediumComponent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onTouchListener="@{activity.initBookDrawerTouched}" />
+
+        <LinearLayout
+            android:id="@+id/item_main_rv_contents_layout_include_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_book_movie_shape_ffffff"
+            android:elevation="1dp"
+            android:padding="5dp"
+            android:layout_marginStart="5dp"
+            android:onClick="@{activity.initCloseDrawer}"
+            android:orientation="vertical"
+            android:visibility="@{content.book.isEmpty() ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_btn_drawer_book">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="• 오늘은 이 책을 읽었어요!"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <ViewStub
+                android:id="@+id/item_main_rv_contents_layout_book"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inflatedId="@+id/item_main_rv_contents_layout_book_inflated"
+                android:layout="@layout/item_form_book" />
+
+        </LinearLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:paddingBottom="10dp"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@id/detail_layout_comment"
+            app:layout_constraintTop_toBottomOf="@id/detail_layout_toolbar"
+            app:layout_constraintVertical_bias="0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/detail_layout_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/detail_iv_profile"
+                        setCircleImage="@{content.user.userProfileImage}"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="15dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        setCircleImage="@{mood}"
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        app:layout_constraintBottom_toBottomOf="@id/detail_iv_profile"
+                        app:layout_constraintEnd_toEndOf="@id/detail_iv_profile" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@{content.user.userNickName}"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/detail_iv_profile"
+                        app:layout_constraintStart_toEndOf="@id/detail_iv_profile"
+                        app:layout_constraintTop_toTopOf="@id/detail_iv_profile"
+                        tools:text="김춘배" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/color_d9d9d9"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/detail_iv_profile" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{content.images.isEmpty() ? View.GONE : View.VISIBLE}"
+                    app:constraint_referenced_ids="detail_vp_images, detail_tab_indicator" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/detail_vp_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    app:layout_constraintBottom_toTopOf="@id/detail_tv_content"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintTop_toBottomOf="@id/detail_layout_user" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/detail_tab_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detail_vp_images"
+                    app:tabBackground="@drawable/item_bg_detail_tab_indicator"
+                    app:tabGravity="center"
+                    app:tabIndicator="@null" />
+
+                <TextView
+                    android:id="@+id/detail_tv_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@{content.content}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detail_vp_images"
+                    tools:text="가나다라마바사" />
+
+                <LinearLayout
+                    android:id="@+id/item_main_rv_contents_layout_include_movie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:visibility="@{content.movie.isEmpty() ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintEnd_toEndOf="@id/detail_tv_content"
+                    app:layout_constraintStart_toStartOf="@id/detail_tv_content"
+                    app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_layout_include_book">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="• 오늘은 이 영화를 봤어요!"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <ViewStub
+                        android:id="@+id/item_main_rv_contents_layout_movie"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inflatedId="@+id/item_main_rv_contents_layout_movie_inflated"
+                        android:layout="@layout/item_form_movie" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_layout_comment"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_d9d9d9"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/comment_input_please"
+                android:paddingHorizontal="15dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/detail_btn_save_comment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/detail_btn_save_comment"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/ic_save_comment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -39,9 +39,9 @@ class ContentUseCase @Inject constructor(
     }
 
 
-    private suspend fun getFeedData(page : Int) : List<ResponseFeed> {
-        return contentRepository.getFeed(page).getOrThrow()
-    }
+//    private suspend fun getFeedData(page : Int) : List<ResponseFeed> {
+//        return contentRepository.getFeed(page).getOrThrow()
+//    }
 
 //    private fun mapUser(data : ResponseFeed) : User {
 //        return User(data.userProfile, data.userNickName)

@@ -22,6 +22,9 @@
     <string name="main_add_comment">댓글 입력하기</string>
     <string name="no_feeds">아직 작성된 기록이 없어요.</string>
 
+    <!-- 글 상세보기 화면 -->
+    <string name="detail_title">%s의 기록</string>
+
     <!-- 책 모아보기 툴 -->
     <string name="book_author">저자  %s</string>
     <string name="book_publisher">출판  %s</string>
