@@ -14,8 +14,15 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(private val contentRepository: ContentRepository) :
     ViewModel() {
 
+    private val _contentIdx = MutableLiveData<Int>()
+    val contentIdx : LiveData<Int> = _contentIdx
+
     private val _contentData = MutableLiveData<Content>()
     val contentData : LiveData<Content> = _contentData
+
+    fun setContentId(contentId : Int) {
+        _contentIdx.value = contentId
+    }
 
     fun getDetailContent(contentId: Int) {
         viewModelScope.launch {

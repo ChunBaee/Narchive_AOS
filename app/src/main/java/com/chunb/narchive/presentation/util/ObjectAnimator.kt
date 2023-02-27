@@ -20,13 +20,20 @@ fun changeYFromTouch(view : View, oldY : Float, newY : Float) : ObjectAnimator{
 }
 
 fun getOpenDrawerAnim(view : View) : ObjectAnimator {
-    return ObjectAnimator.ofFloat(view, "translationX", 0F)
-        .setDuration(1000)
+    return ObjectAnimator.ofFloat(view, "translationY", view.height.toFloat())
+        .setDuration(500)
+}
+
+fun getOpenDrawerAlphaAnim(view : View) : ObjectAnimator {
+    return ObjectAnimator.ofFloat(view, "alpha", 0F, 1F).setDuration(500)
 }
 
 fun getCloseDrawerAnim(view : View) : ObjectAnimator {
-    Log.d("----", "getOpenDrawerAnim: CALLED")
-    return ObjectAnimator.ofFloat(view, "translationX", view.width.toFloat())
-        .setDuration(1000)
+    return ObjectAnimator.ofFloat(view, "translationY", 0F)
+        .setDuration(500)
+}
+
+fun getCloseDrawerAlphaAnim(view : View) : ObjectAnimator {
+    return ObjectAnimator.ofFloat(view, "alpha", 1F, 0F).setDuration(500)
 }
 

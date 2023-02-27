@@ -1,5 +1,8 @@
 package com.chunb.narchive.presentation.ui.detail.view
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,11 +24,14 @@ import com.chunb.narchive.data.remote.response.Movie
 import com.chunb.narchive.databinding.ActivityDetailBinding
 import com.chunb.narchive.databinding.ItemFormBookBinding
 import com.chunb.narchive.databinding.ItemFormMovieBinding
+import com.chunb.narchive.presentation.ui.comment.view.CommentActivity
 import com.chunb.narchive.presentation.ui.detail.adapter.DetailImageAdapter
 import com.chunb.narchive.presentation.ui.detail.viewmodel.DetailViewModel
 import com.chunb.narchive.presentation.util.changeYFromTouch
+import com.chunb.narchive.presentation.util.getCloseDrawerAlphaAnim
 import com.chunb.narchive.presentation.util.getCloseDrawerAnim
 import com.chunb.narchive.presentation.util.getOpenAnim
+import com.chunb.narchive.presentation.util.getOpenDrawerAlphaAnim
 import com.chunb.narchive.presentation.util.getOpenDrawerAnim
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,12 +41,12 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private val viewModel: DetailViewModel by viewModels()
 
-    var oldY = 0F
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
 
         initBinding()
+        observeContentId()
         getContentDetailData()
         observeDetail()
     }
@@ -51,7 +57,14 @@ class DetailActivity : AppCompatActivity() {
 
     private fun getContentDetailData() {
         val contentId = intent.getIntExtra("contentIdx", 0)
-        viewModel.getDetailContent(contentId)
+        viewModel.setContentId(contentId)
+
+    }
+
+    private fun observeContentId() {
+        viewModel.contentIdx.observe(this) {
+            viewModel.getDetailContent(it)
+        }
     }
 
     private fun observeDetail() {
@@ -59,8 +72,8 @@ class DetailActivity : AppCompatActivity() {
             Log.d("----", "observeDetail: ${it.book}")
             binding.content = it
             binding.mood = Mood.valueOf(it.mood).res
-            it.images?.let {images -> setVp(images) }
-            if(it.book?.isNotEmpty() == true) setBook(it.book[0])
+            it.images?.let { images -> setVp(images) }
+            if (it.book?.isNotEmpty() == true) setBook(it.book[0])
             if (it.movie?.isNotEmpty() == true) setMovie(it.movie[0])
         }
     }
@@ -74,44 +87,29 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setBook(book : Book) {
+    private fun setBook(book: Book) {
         binding.itemMainRvContentsLayoutBook.apply {
-                    setOnInflateListener { _, _ ->
-                        val bookBinding = this.binding as ItemFormBookBinding
-                        bookBinding.bookData = book
-                    }
-                }
-                binding.itemMainRvContentsLayoutBook.viewStub?.inflate()
-    }
-
-    private fun setMovie(movie : Movie) {
-        binding.itemMainRvContentsLayoutMovie.apply {
-                    setOnInflateListener { _, _ ->
-                        val movieBinding = this.binding as ItemFormMovieBinding
-                        movieBinding.movieData = movie
-                    }
-                }
-                binding.itemMainRvContentsLayoutMovie.viewStub?.inflate()
-    }
-
-    fun initBookDrawerTouched(view : View, event : MotionEvent) : Boolean {
-        when (event.action) {
-            MotionEvent.ACTION_DOWN -> {
-                oldY = event.y
-            }
-            MotionEvent.ACTION_MOVE -> {
-                val movedY: Float = event.y - oldY
-                view.y = view.y + movedY
-                binding.itemMainRvContentsLayoutIncludeBook.y = view.y + movedY + view.height
-            }
-            MotionEvent.ACTION_UP -> {
-                getOpenDrawerAnim(binding.itemMainRvContentsLayoutIncludeBook).start()
+            setOnInflateListener { _, _ ->
+                val bookBinding = this.binding as ItemFormBookBinding
+                bookBinding.bookData = book
             }
         }
-        return true
+        binding.itemMainRvContentsLayoutBook.viewStub?.inflate()
     }
 
-    fun initCloseDrawer(view : View) {
-        getCloseDrawerAnim(view).start()
+    private fun setMovie(movie: Movie) {
+        binding.itemMainRvContentsLayoutMovie.apply {
+            setOnInflateListener { _, _ ->
+                val movieBinding = this.binding as ItemFormMovieBinding
+                movieBinding.movieData = movie
+            }
+        }
+        binding.itemMainRvContentsLayoutMovie.viewStub?.inflate()
+    }
+
+    fun openComment() {
+        val intent = Intent(this, CommentActivity::class.java)
+        intent.putExtra("contentIdx", viewModel.contentIdx.value)
+        startActivity(intent)
     }
 }

@@ -84,7 +84,6 @@ class FeedFragment : Fragment() {
     }
 
     private fun openDetailFeedFragment(position : Int) {
-        Log.d("----", "openDetailFeedFragment: $position")
         val intent = Intent(requireActivity(), DetailActivity::class.java)
         intent.putExtra("contentIdx", position)
         startActivity(intent)

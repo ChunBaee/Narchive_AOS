@@ -25,7 +25,7 @@ fun ImageView.setCircleImage(path: Any?) {
 }
 
 @BindingAdapter("setImage")
-fun ImageView.setImage(path: Any) {
+fun ImageView.setImage(path: Any?) {
     Glide.with(this).load(path).into(this)
 }
 

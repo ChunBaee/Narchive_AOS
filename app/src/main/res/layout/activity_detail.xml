@@ -55,56 +55,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/detail_btn_drawer_book"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="mini"
-            android:src="@drawable/ic_write_open_book"
-            android:alpha="0.5"
-            app:tint="@color/color_b2f0f4"
-            android:background="@drawable/bg_card_4_f7f8f9"
-            app:backgroundTint="@color/white"
-            app:shapeAppearanceOverlay="?attr/shapeAppearanceMediumComponent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:onTouchListener="@{activity.initBookDrawerTouched}" />
-
-        <LinearLayout
-            android:id="@+id/item_main_rv_contents_layout_include_book"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_book_movie_shape_ffffff"
-            android:elevation="1dp"
-            android:padding="5dp"
-            android:layout_marginStart="5dp"
-            android:onClick="@{activity.initCloseDrawer}"
-            android:orientation="vertical"
-            android:visibility="@{content.book.isEmpty() ? View.GONE : View.VISIBLE}"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_btn_drawer_book">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="• 오늘은 이 책을 읽었어요!"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
-            <ViewStub
-                android:id="@+id/item_main_rv_contents_layout_book"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inflatedId="@+id/item_main_rv_contents_layout_book_inflated"
-                android:layout="@layout/item_form_book" />
-
-        </LinearLayout>
-
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -182,16 +132,18 @@
                     android:layout_height="0dp"
                     android:clipChildren="false"
                     android:clipToPadding="false"
-                    app:layout_constraintBottom_toTopOf="@id/detail_tv_content"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintTop_toBottomOf="@id/detail_layout_user" />
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/detail_tab_indicator"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="10dp"
                     android:layout_marginTop="10dp"
+                    app:tabMode="fixed"
                     android:background="@android:color/transparent"
+                    app:tabPaddingEnd="8dp"
+                    app:tabPaddingStart="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/detail_vp_images"
@@ -208,27 +160,70 @@
                     android:text="@{content.content}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
+                    android:paddingBottom="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detail_vp_images"
+                    app:layout_constraintTop_toBottomOf="@id/detail_tab_indicator"
                     tools:text="가나다라마바사" />
 
+                <View
+                    android:id="@+id/detail_divider_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/color_e8f6f6"
+                    app:layout_constraintTop_toBottomOf="@id/detail_tv_content" />
+
                 <LinearLayout
-                    android:id="@+id/item_main_rv_contents_layout_include_movie"
+                    android:id="@+id/detail_viewstub_book"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    android:visibility="@{content.movie.isEmpty() ? View.GONE : View.VISIBLE}"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:visibility="@{content.book.isEmpty() ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="@id/detail_tv_content"
                     app:layout_constraintStart_toStartOf="@id/detail_tv_content"
-                    app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_layout_include_book">
+                    app:layout_constraintTop_toBottomOf="@id/detail_divider_content">
 
                     <TextView
+                        android:id="@+id/detail_tv_notice_book"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
+                        android:text="• 오늘은 이 책을 읽었어요!"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/detail_tv_content"
+                        app:layout_constraintStart_toStartOf="@id/detail_tv_content"
+                        app:layout_constraintTop_toBottomOf="@id/detail_tab_indicator" />
+
+                    <ViewStub
+                        android:id="@+id/item_main_rv_contents_layout_book"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inflatedId="@+id/item_main_rv_contents_layout_book_inflated"
+                        android:layout="@layout/item_form_book" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/detail_viewstub_movie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{content.movie.isEmpty() ? View.GONE : View.VISIBLE}"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@id/detail_tv_content"
+                    app:layout_constraintStart_toStartOf="@id/detail_tv_content"
+                    app:layout_constraintTop_toBottomOf="@id/detail_viewstub_book">
+
+                    <TextView
+                        android:id="@+id/detail_tv_notice_movie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:elevation="0.1dp"
                         android:text="• 오늘은 이 영화를 봤어요!"
                         android:textColor="@color/black"
                         android:textSize="17sp"
@@ -251,6 +246,7 @@
             android:id="@+id/detail_layout_comment"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
+            android:onClick="@{() -> activity.openComment()}"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <View
@@ -259,13 +255,12 @@
                 android:background="@color/color_d9d9d9"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:hint="@string/comment_input_please"
+                android:text="@string/comment_input_please"
                 android:paddingHorizontal="15dp"
-                android:textColor="@color/black"
+                android:textColor="@color/color_727272"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/detail_btn_save_comment"

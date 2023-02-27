@@ -54,6 +54,9 @@
             android:windowSoftInputMode="adjustResize"
             android:exported="true" />
 
+        <activity android:name=".presentation.ui.comment.view.CommentActivity"
+            android:exported="true" />
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
