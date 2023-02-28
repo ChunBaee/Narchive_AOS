@@ -125,10 +125,7 @@ class WriteActivity : AppCompatActivity() {
 
     private fun observeBookMovie() {
         viewModel.selectBook.observe(this) {
-            Log.d("----", "observeBookMovie: ${bookMovieAdapter.mData}")
-
             val checkBook = bookMovieAdapter.mData.indexOfFirst { t->  t.javaClass.name.contains("Book") }
-            Log.d("----", "observeBookMovie: $checkBook")
             if (checkBook != -1) {
                 bookMovieAdapter.mData[checkBook] = it
             } else {
@@ -139,7 +136,6 @@ class WriteActivity : AppCompatActivity() {
 
         viewModel.selectMovie.observe(this) {
             val checkMovie = bookMovieAdapter.mData.indexOfFirst { t->  t.javaClass.name.contains("Movie") }
-            Log.d("----", "observeBookMovie: $checkMovie")
             if (checkMovie != -1) {
                 bookMovieAdapter.mData[checkMovie] = it
             } else {

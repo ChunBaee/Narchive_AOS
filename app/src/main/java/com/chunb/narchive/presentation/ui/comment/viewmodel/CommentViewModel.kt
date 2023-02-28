@@ -51,5 +51,4 @@ class CommentViewModel @Inject constructor(private val commentRepository: Commen
                 }
         }
     }
-
 }

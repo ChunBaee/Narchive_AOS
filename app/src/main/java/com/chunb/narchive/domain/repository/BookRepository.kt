@@ -1,8 +1,8 @@
 package com.chunb.narchive.domain.repository
 
-import com.chunb.narchive.data.remote.response.Book
+import com.chunb.narchive.data.remote.response.ArchiveBook
 
 interface BookRepository {
 
-    suspend fun getBook(query : String?) : Result<List<Book>>
+    suspend fun getBook() : Result<List<ArchiveBook>>
 }

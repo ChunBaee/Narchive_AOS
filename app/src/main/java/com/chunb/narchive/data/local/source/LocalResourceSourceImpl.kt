@@ -1,6 +1,7 @@
 package com.chunb.narchive.data.local.source
 
 import com.chunb.narchive.R
+import com.chunb.narchive.data.data.ArchiveTabData
 import com.chunb.narchive.data.local.data.MoodData
 import com.chunb.narchive.data.local.data.OnBoardingData
 import com.chunb.narchive.data.source.LocalResourceSource
@@ -33,6 +34,13 @@ class LocalResourceSourceImpl : LocalResourceSource {
     override fun getTodayDate(): String {
         return SimpleDateFormat("yyyy.MM.dd", Locale.KOREA).format(Date(System.currentTimeMillis())).toString()
     }
+
+    override fun getArchiveTabData(): List<ArchiveTabData> =
+        listOf(
+            ArchiveTabData(0, R.drawable.ic_write_open_book),
+            ArchiveTabData(1, R.drawable.ic_write_open_movie),
+            ArchiveTabData(2, R.drawable.ic_write_open_gallery)
+        )
 
 
 }

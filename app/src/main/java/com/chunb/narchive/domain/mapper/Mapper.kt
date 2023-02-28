@@ -2,6 +2,8 @@ package com.chunb.narchive.domain.mapper
 
 import android.text.Html
 import com.chunb.narchive.data.remote.request.RequestPostContent
+import com.chunb.narchive.data.remote.response.ArchiveBook
+import com.chunb.narchive.data.remote.response.ArchiveMovie
 import com.chunb.narchive.data.remote.response.Book
 import com.chunb.narchive.data.remote.response.Movie
 import com.chunb.narchive.data.remote.response.ResultSearchBook
@@ -34,5 +36,25 @@ fun String.mapToFeedData(mood : String, imageList : MutableList<String>?, book :
         imageList,
         book,
         movie
+    )
+}
+
+fun ArchiveBook.mapToBook() : Book {
+    return Book(
+        this.bookImageThumbnail,
+        this.bookTitle,
+        this.author,
+        this.publisher,
+        this.publishedDate
+    )
+}
+
+fun ArchiveMovie.mapToMovie() : Movie {
+    return Movie(
+        this.movieImageThumbnail,
+        this.movieTitle,
+        this.director,
+        this.actor,
+        this.releaseYear
     )
 }

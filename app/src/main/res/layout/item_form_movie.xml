@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="contentIdx"
+            type="Integer" />
 
         <variable
             name="movieData"

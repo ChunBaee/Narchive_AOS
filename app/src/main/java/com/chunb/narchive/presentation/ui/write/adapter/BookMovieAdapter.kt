@@ -17,7 +17,6 @@ class BookMovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class BookViewHolder(private val binding: ItemFormBookBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Book?) {
-            Log.d("----", "bind: $item")
             binding.bookData = item
         }
     }
@@ -25,7 +24,6 @@ class BookMovieAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class MovieViewHolder(private val binding: ItemFormMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Movie?) {
-            Log.d("----", "bind: $item")
             binding.movieData = item
         }
     }

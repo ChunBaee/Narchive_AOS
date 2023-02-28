@@ -1,19 +1,7 @@
 package com.chunb.narchive.domain.usecase
 
-import com.chunb.narchive.data.remote.response.Content
-import com.chunb.narchive.data.remote.response.Image
-import com.chunb.narchive.data.remote.response.Movie
-import com.chunb.narchive.data.remote.response.Book
-import com.chunb.narchive.data.remote.response.Comment
-import com.chunb.narchive.data.remote.response.ResponseFeed
-import com.chunb.narchive.data.remote.response.User
 import com.chunb.narchive.domain.data.Contents
-import com.chunb.narchive.domain.repository.BookRepository
-import com.chunb.narchive.domain.repository.CommentRepository
 import com.chunb.narchive.domain.repository.ContentRepository
-import com.chunb.narchive.domain.repository.ImageRepository
-import com.chunb.narchive.domain.repository.MovieRepository
-import com.chunb.narchive.domain.repository.UserRepository
 import javax.inject.Inject
 
 class ContentUseCase @Inject constructor(

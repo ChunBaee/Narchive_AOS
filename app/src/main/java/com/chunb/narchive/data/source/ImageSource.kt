@@ -5,5 +5,5 @@ import com.chunb.narchive.data.remote.response.Image
 
 interface ImageSource {
 
-    suspend fun getImages(query : String?) : Result<List<Image>>
+    suspend fun getImages() : Result<List<Image>>
 }

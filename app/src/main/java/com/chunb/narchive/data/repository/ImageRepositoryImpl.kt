@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class ImageRepositoryImpl @Inject constructor(private val imageRemoteSource: ImageSource):
     ImageRepository {
-    override suspend fun getImages(query : String?): Result<List<Image>> {
-        return imageRemoteSource.getImages(query)
+    override suspend fun getImages(): Result<List<Image>> {
+        return imageRemoteSource.getImages()
     }
 }

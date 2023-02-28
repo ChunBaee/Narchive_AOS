@@ -8,6 +8,10 @@
         <variable
             name="bookData"
             type="com.chunb.narchive.data.remote.response.Book" />
+
+        <variable
+            name="contentIdx"
+            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

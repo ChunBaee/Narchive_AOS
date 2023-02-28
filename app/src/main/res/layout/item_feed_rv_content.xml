@@ -4,10 +4,6 @@
 
     <data>
         <variable
-            name="content"
-            type="com.chunb.narchive.data.remote.response.ResponseFeed" />
-
-        <variable
             name="comment"
             type="com.chunb.narchive.data.remote.response.Comment" />
 

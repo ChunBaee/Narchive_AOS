@@ -62,7 +62,12 @@ class CommentActivity : AppCompatActivity() {
     private fun observeSnackbarData() {
         viewModel.snackBarState.observe(this) {
             Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+            initCurrentComment()
         }
+    }
+
+    private fun initCurrentComment() {
+        binding.commentEdtComment.setText("")
     }
 
     fun dismiss() {

@@ -3,7 +3,6 @@ package com.chunb.narchive.data.remote.source.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.chunb.narchive.data.remote.response.Feed
-import com.chunb.narchive.data.remote.response.ResponseFeed
 import com.chunb.narchive.data.remote.service.ContentService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

@@ -6,9 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ImageService {
-
-    @GET("/contents/images")
-    suspend fun getImages(
-        @Query("query") query : String?
-    ) : Response<List<Image>>
+    @GET("/archive/images")
+    suspend fun getImages() : Response<List<Image>>
 }
