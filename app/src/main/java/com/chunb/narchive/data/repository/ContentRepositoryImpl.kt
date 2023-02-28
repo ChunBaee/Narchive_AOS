@@ -8,6 +8,7 @@ import com.chunb.narchive.data.remote.response.Content
 import com.chunb.narchive.data.remote.response.Feed
 import com.chunb.narchive.data.remote.service.ContentService
 import com.chunb.narchive.data.remote.source.paging.FeedPagingSource
+import com.chunb.narchive.data.remote.source.paging.FilteredFeedPagingSource
 import com.chunb.narchive.data.source.ContentSource
 import com.chunb.narchive.domain.repository.ContentRepository
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,12 @@ class ContentRepositoryImpl @Inject constructor(private val contentRemoteSource:
     override fun getFeedPagingData(): Flow<PagingData<Feed>> {
         return Pager(PagingConfig(pageSize = 10)) {
             FeedPagingSource(Dispatchers.IO, contentService)
+        }.flow
+    }
+
+    override fun getFilteredFeedPagingData(query : String): Flow<PagingData<Feed>> {
+        return Pager(PagingConfig(pageSize = 10)) {
+            FilteredFeedPagingSource(query, Dispatchers.IO, contentService)
         }.flow
     }
 

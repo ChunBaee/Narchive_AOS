@@ -18,6 +18,12 @@ interface ContentService {
         @Query("page") page : Int
     ) : Response<List<Feed>>
 
+    @GET("/contents/feed/filter")
+    suspend fun getFilteredFeed(
+        @Query("page") page : Int,
+        @Query("query") query : String
+    ) : Response<List<Feed>>
+
     @POST("/contents")
     suspend fun postFeed(
         @Body body : RequestPostContent

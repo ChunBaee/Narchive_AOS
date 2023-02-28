@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.Flow
 interface ContentRepository {
     fun getFeedPagingData() : Flow<PagingData<Feed>>
 
+    fun getFilteredFeedPagingData(query : String) : Flow<PagingData<Feed>>
+
     suspend fun postFeed(body : RequestPostContent) : Result<Int>
 
     suspend fun getDetailContent(contentId : Int) : Result<Content>

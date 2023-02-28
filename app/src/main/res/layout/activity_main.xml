@@ -1,57 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_e8f6f6">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="activity"
+            type="com.chunb.narchive.presentation.ui.main.view.MainActivity" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main_layout_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/color_b2f0f4"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@color/color_e8f6f6">
 
-        <ImageView
-            android:id="@+id/main_toolbar_iv_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_initial_narchive"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/color_b2f0f4"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_search"
+            <ImageView
+                android:id="@+id/main_toolbar_iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_initial_narchive"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_search"
+                android:onClick="@{() -> activity.openFilterActivity()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:id="@+id/main_layout_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/main_layout_btm_nav"
+            app:layout_constraintTop_toBottomOf="@id/main_layout_toolbar" />
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/main_layout_btm_nav"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/color_e8f6f6"
+            app:elevation="0dp"
+            app:itemBackground="@android:color/transparent"
+            app:itemIconTint="@color/selector_bottom_nav"
+            app:itemTextColor="@color/selector_bottom_nav"
+            app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:menu="@menu/main_btm_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-        android:id="@+id/main_layout_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/main_layout_btm_nav"
-        app:layout_constraintTop_toBottomOf="@id/main_layout_toolbar" />
-
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/main_layout_btm_nav"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/color_e8f6f6"
-        app:elevation="0dp"
-        app:itemBackground="@android:color/transparent"
-        app:itemIconTint="@color/selector_bottom_nav"
-        app:itemTextColor="@color/selector_bottom_nav"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/main_btm_menu" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
