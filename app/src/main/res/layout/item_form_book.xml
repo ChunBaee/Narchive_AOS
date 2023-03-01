@@ -48,7 +48,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@{bookData.bookTitle}"
-                android:textColor="@color/black"
+                android:textColor="@color/black_white"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/item_archive_vp_inner_tv_book_author"

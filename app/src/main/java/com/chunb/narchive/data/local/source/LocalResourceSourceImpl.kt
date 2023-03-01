@@ -14,9 +14,9 @@ class LocalResourceSourceImpl : LocalResourceSource {
 
     override suspend fun getOnBindingData(): List<OnBoardingData> =
         listOf(
-            OnBoardingData(R.drawable.img_on_boarding_vp_1, "온보딩 첫번째"),
-            OnBoardingData(R.drawable.img_on_boarding_vp_2, "온보딩 두번째"),
-            OnBoardingData(R.drawable.img_on_boarding_vp_3, "온보딩 세번째")
+            OnBoardingData(R.drawable.img_on_boarding_vp_1, "하고싶은 말은 많지만 할 수 없는 상황이 가끔 있죠?"),
+            OnBoardingData(R.drawable.img_on_boarding_vp_2, "나만의 소중한 일상을 기록하고 싶지 않나요?"),
+            OnBoardingData(R.drawable.img_on_boarding_vp_3, "나의 지난 시간들을 한눈에 모아보고 싶지는 않은가요?")
         )
 
     override suspend fun getMoodsData(): List<MoodData> =
@@ -47,7 +47,7 @@ class LocalResourceSourceImpl : LocalResourceSource {
         listOf(
             SettingMenuData(R.drawable.ic_sign_out, "로그아웃"),
             SettingMenuData(R.drawable.ic_edit_profile, "프로필 수정"),
-            SettingMenuData(R.drawable.ic_delete_user, "회원 탈퇴")
+            SettingMenuData(R.drawable.ic_delete_user, "회원 탈퇴"),
         )
 
 

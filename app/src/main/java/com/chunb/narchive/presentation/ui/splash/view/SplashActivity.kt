@@ -1,9 +1,14 @@
 package com.chunb.narchive.presentation.ui.splash.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.chunb.narchive.R
 import com.chunb.narchive.presentation.ui.auth.view.SignInActivity
 import com.chunb.narchive.presentation.ui.main.view.MainActivity
 import com.chunb.narchive.presentation.ui.splash.viewmodel.SplashViewModel
@@ -14,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
     private val viewModel : SplashViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        //setContentView(R.layout.activity_splash)
         observeAutoAuth()
     }
 

@@ -89,4 +89,8 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun openAllowDialog() {
+        AllowDialog().show(supportFragmentManager, "dialog")
+    }
 }

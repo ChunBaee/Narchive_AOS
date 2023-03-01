@@ -16,13 +16,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_e8f6f6">
+        android:background="@color/color_e8f6f6_06102c">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/filter_layout_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@color/color_b2f0f4"
+            android:background="@color/color_b2f0f4_090022"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView

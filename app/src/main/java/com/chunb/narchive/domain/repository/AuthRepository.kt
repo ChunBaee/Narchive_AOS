@@ -12,4 +12,6 @@ interface AuthRepository {
     suspend fun autoSignIn() : Result<ResponseSignIn>
 
     suspend fun deleteUserJWT()
+
+    suspend fun deleteUser() : Result<String>
 }

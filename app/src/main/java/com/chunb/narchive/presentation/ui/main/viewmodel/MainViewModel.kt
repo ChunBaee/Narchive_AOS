@@ -1,5 +1,6 @@
 package com.chunb.narchive.presentation.ui.main.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,8 +52,14 @@ class MainViewModel @Inject constructor(
     private val _userData = MutableLiveData<User>()
     val userData : LiveData<User> = _userData
 
+    private val _dialogTitle = MutableLiveData<String>()
+    val dialogTitle : LiveData<String> = _dialogTitle
+
+    private val _dialogType = MutableLiveData<Int>()
+    val dialogType : LiveData<Int> = _dialogType
+
     fun getFeedData() : Flow<PagingData<Feed>> {
-        return contentRepository.getFeedPagingData().cachedIn(viewModelScope)
+        return contentRepository.getFeedPagingData()
     }
 
     fun getArchiveTabData() : List<ArchiveTabData> = localResourceRepository.getArchiveTabData()
@@ -75,10 +82,33 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun initSignOut() {
+    private fun initSignOut() {
         viewModelScope.launch {
             authRepository.deleteUserJWT()
             kakaoAuthRepository.initKakaoSignOut()
+        }
+    }
+
+    private fun initDeleteUser() {
+        viewModelScope.launch {
+            authRepository.deleteUser()
+            authRepository.deleteUserJWT()
+            kakaoAuthRepository.initKakaoSignOut()
+        }
+    }
+
+    fun setDialogType(type : Int) {
+        _dialogType.value = type
+        _dialogTitle.value = when(type) {
+            0 ->  "정말 로그아웃 하시겠어요?"
+            else -> "정말 탈퇴하시겠어요?"
+        }
+    }
+
+    fun onDialogClickYes() {
+        when(_dialogType.value) {
+            0 -> initSignOut()
+            else -> initDeleteUser()
         }
     }
 }

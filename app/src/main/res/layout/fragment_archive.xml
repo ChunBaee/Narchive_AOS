@@ -24,7 +24,7 @@
             app:tabRippleColor="@android:color/transparent"
             app:tabIconTint="@color/selector_tab_archive"
             app:tabIndicatorFullWidth="true"
-            app:tabIndicatorColor="@color/color_b2f0f4"
+            app:tabIndicatorColor="@color/color_b2f0f4_090022"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

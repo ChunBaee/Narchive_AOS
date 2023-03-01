@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/color_e8f6f6_06102c">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fg_setting_layout_top"
@@ -48,7 +48,7 @@
                 tools:text="지연이 바보"
                 android:text="@{viewModel.userData.userNickName}"
                 android:textSize="20sp"
-                android:textColor="@color/black"
+                android:textColor="@color/black_white"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/fg_setting_iv_profile"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -61,6 +61,7 @@
             android:id="@+id/fg_setting_rv_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:overScrollMode="never"
             app:layout_constraintTop_toBottomOf="@id/fg_setting_layout_top"
             android:layout_margin="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

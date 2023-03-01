@@ -8,4 +8,6 @@ interface AuthSource {
     suspend fun postSignIn(body : RequestPostSignIn) : Result<ResponseSignIn>
 
     suspend fun autoSignIn() : Result<ResponseSignIn>
+
+    suspend fun deleteUser() : Result<String>
 }

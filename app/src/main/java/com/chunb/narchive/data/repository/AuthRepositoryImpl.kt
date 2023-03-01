@@ -26,4 +26,8 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun deleteUserJWT() {
         sharedPrefSource.deleteUserJWT()
     }
+
+    override suspend fun deleteUser(): Result<String> {
+        return authRemoteSource.deleteUser()
+    }
 }

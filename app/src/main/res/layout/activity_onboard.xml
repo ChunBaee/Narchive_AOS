@@ -50,7 +50,7 @@
             android:background="@color/selector_btn_finish"
             android:text="@string/before_start_btn_start"
             android:onClick="@{() -> activity.dismissOnBoarding()}"
-            android:textColor="@color/white"
+            android:textColor="@color/white_black"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"

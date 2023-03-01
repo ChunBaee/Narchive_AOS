@@ -61,10 +61,9 @@ class SettingFragment : Fragment() {
                     1 -> {
                         startActivity(Intent(requireActivity(), ProfileActivity::class.java))
                     }
-                    else -> {
-                        viewModel.initSignOut()
-                        startActivity(Intent(requireActivity(), SplashActivity::class.java))
-                        requireActivity().finish()
+                    0,2 -> {
+                        viewModel.setDialogType(position)
+                        SettingDialog().show(childFragmentManager, "Dialog")
                     }
                 }
             }

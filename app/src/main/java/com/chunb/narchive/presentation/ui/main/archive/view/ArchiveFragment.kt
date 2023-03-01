@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.chunb.narchive.R
 import com.chunb.narchive.databinding.FragmentArchiveBinding
 import com.chunb.narchive.presentation.ui.detail.view.DetailActivity
@@ -50,6 +51,7 @@ class ArchiveFragment : Fragment() {
     private fun initVP() {
         archiveAdapter = ArchiveAdapter(requireContext())
         binding.fgArchiveLayoutVp.apply {
+            this.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
             this.adapter = archiveAdapter
             TabLayoutMediator(binding.fgArchiveLayoutTab, this) { mTab, position ->
                 mTab.icon =

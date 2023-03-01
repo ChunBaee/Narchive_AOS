@@ -2,6 +2,7 @@ package com.chunb.narchive.presentation.ui.main.feed.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,17 +39,23 @@ class FeedFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
 
+        Log.d("----", "onCreateView: Hi")
+
         initBinding()
         initFeed()
-        observeFeed()
 
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.getFeedData()
-        //loadingDialog.show()
+    override fun onResume() {
+        super.onResume()
+        refreshOnResume()
+        scrollToTop()
+    }
+
+    private fun refreshOnResume() {
+        //viewModel.getFeedData()
+        observeFeed()
     }
 
     private fun initBinding() {

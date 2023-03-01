@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:src="@drawable/ic_write"
-            app:backgroundTint="@color/color_b2f0f4"
+            app:backgroundTint="@color/color_b2f0f4_090022"
             android:alpha="0.7"
             app:fabSize="mini"
             app:elevation="0dp"

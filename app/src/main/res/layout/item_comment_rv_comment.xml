@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white_black">
 
         <ImageView
             android:id="@+id/item_comment_rv_comments_iv_profile"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@{data.nickName}"
-            android:textColor="@color/black"
+            android:textColor="@color/black_white"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/item_comment_rv_comments_iv_profile"
@@ -52,7 +52,7 @@
             android:layout_marginVertical="20dp"
             android:layout_marginEnd="20dp"
             android:text="@{data.content}"
-            android:textColor="@color/black"
+            android:textColor="@color/black_white"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/item_comment_rv_comments_iv_profile"

@@ -23,5 +23,13 @@ class AuthRemoteSourceImpl @Inject constructor(private val authService: AuthServ
         return Result.failure(IllegalArgumentException())
     }
 
+    override suspend fun deleteUser(): Result<String> {
+        val authRes = authService.deleteUser()
+        if(authRes.isSuccessful) {
+            return Result.success(authRes.message())
+        }
+        return Result.failure(IllegalArgumentException())
+    }
+
 
 }

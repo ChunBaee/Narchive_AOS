@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/black_white"
                 android:textSize="17sp"
                 android:text="@{viewModel.getTodayDate()}"
                 app:layout_constraintBottom_toBottomOf="@id/write_btn_finish"
@@ -63,7 +63,7 @@
             android:id="@+id/write_layout_select_mood"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@color/color_b2f0f4"
+            android:background="@color/color_b2f0f4_090022"
             app:layout_constraintTop_toBottomOf="@id/write_layout_toolbar">
 
             <TextView
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="@string/write_hows_your_mood"
-                android:textColor="@color/white"
+                android:textColor="@color/white_black"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -101,7 +101,7 @@
             android:hint="@string/write_content_hint"
             android:lineHeight="20dp"
             android:padding="10dp"
-            android:textColor="@color/black"
+            android:textColor="@color/black_white"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@id/write_layout_bottom_additional"
             app:layout_constraintTop_toBottomOf="@id/write_layout_select_mood" />
@@ -109,7 +109,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/color_b2f0f4"
+            android:backgroundTint="@color/color_b2f0f4_090022"
             android:src="@drawable/ic_cloud"
             app:borderWidth="0dp"
             app:fabSize="mini"
@@ -119,7 +119,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/write_layout_bottom_additional"
             app:layout_constraintStart_toStartOf="parent"
-            app:tint="@color/white" />
+            app:tint="@color/white_black" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -160,7 +160,7 @@
             android:id="@+id/write_layout_bottom_additional"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/white"
+            android:background="@color/white_black"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <View
