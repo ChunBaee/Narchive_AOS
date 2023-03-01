@@ -22,4 +22,8 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun autoSignIn(): Result<ResponseSignIn> {
         return authRemoteSource.autoSignIn()
     }
+
+    override suspend fun deleteUserJWT() {
+        sharedPrefSource.deleteUserJWT()
+    }
 }

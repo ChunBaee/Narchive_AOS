@@ -7,9 +7,9 @@ import retrofit2.http.Query
 
 interface UserService {
 
-    @GET("/users/contents")
-    suspend fun getUserWithContentId(
-        @Query("query") query : String?
-    ) : Response<List<User>>
+    @GET("/users")
+    suspend fun getUserData() : Response<User>
+
+
 
 }

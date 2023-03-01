@@ -7,15 +7,20 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.chunb.narchive.data.data.ArchiveTabData
+import com.chunb.narchive.data.data.SettingMenuData
 import com.chunb.narchive.data.remote.response.ArchiveBook
 import com.chunb.narchive.data.remote.response.ArchiveMovie
 import com.chunb.narchive.data.remote.response.Feed
 import com.chunb.narchive.data.remote.response.Image
+import com.chunb.narchive.data.remote.response.User
+import com.chunb.narchive.domain.repository.AuthRepository
 import com.chunb.narchive.domain.repository.BookRepository
 import com.chunb.narchive.domain.repository.ContentRepository
 import com.chunb.narchive.domain.repository.ImageRepository
+import com.chunb.narchive.domain.repository.KakaoAuthRepository
 import com.chunb.narchive.domain.repository.LocalResourceRepository
 import com.chunb.narchive.domain.repository.MovieRepository
+import com.chunb.narchive.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -27,7 +32,10 @@ class MainViewModel @Inject constructor(
     private val localResourceRepository: LocalResourceRepository,
     private val bookRepository: BookRepository,
     private val movieRepository : MovieRepository,
-    private val imageRepository: ImageRepository
+    private val imageRepository: ImageRepository,
+    private val userRepository: UserRepository,
+    private val authRepository: AuthRepository,
+    private val kakaoAuthRepository: KakaoAuthRepository
 ) : ViewModel() {
 
     private val _archiveBookData = MutableLiveData<MutableList<ArchiveBook>>()
@@ -36,6 +44,12 @@ class MainViewModel @Inject constructor(
     val archiveMovieData : LiveData<MutableList<ArchiveMovie>> = _archiveMovieData
     private val _archiveImageData = MutableLiveData<MutableList<Image>>()
     val archiveImageData : LiveData<MutableList<Image>> = _archiveImageData
+
+    private val _settingMenuData = MutableLiveData<List<SettingMenuData>>().apply { value = localResourceRepository.getSettingMenuData() }
+    val settingMenuData : LiveData<List<SettingMenuData>> = _settingMenuData
+
+    private val _userData = MutableLiveData<User>()
+    val userData : LiveData<User> = _userData
 
     fun getFeedData() : Flow<PagingData<Feed>> {
         return contentRepository.getFeedPagingData().cachedIn(viewModelScope)
@@ -51,6 +65,20 @@ class MainViewModel @Inject constructor(
                 .onSuccess { _archiveMovieData.value = it as MutableList }
             imageRepository.getImages()
                 .onSuccess { _archiveImageData.value = it as MutableList }
+        }
+    }
+
+    fun getUserRes() {
+        viewModelScope.launch {
+            userRepository.getUserData()
+                .onSuccess { _userData.value = it }
+        }
+    }
+
+    fun initSignOut() {
+        viewModelScope.launch {
+            authRepository.deleteUserJWT()
+            kakaoAuthRepository.initKakaoSignOut()
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.chunb.narchive.data.repository
 
 import com.chunb.narchive.data.data.ArchiveTabData
+import com.chunb.narchive.data.data.SettingMenuData
 import com.chunb.narchive.data.local.data.MoodData
 import com.chunb.narchive.data.local.data.OnBoardingData
 import com.chunb.narchive.data.source.LocalResourceSource
@@ -22,5 +23,9 @@ class LocalResourceRepositoryImpl @Inject constructor(private val localResourceS
 
     override fun getArchiveTabData(): List<ArchiveTabData> {
         return localResourceSource.getArchiveTabData()
+    }
+
+    override fun getSettingMenuData(): List<SettingMenuData> {
+        return localResourceSource.getSettingMenuData()
     }
 }

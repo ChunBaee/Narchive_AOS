@@ -14,6 +14,10 @@ class KakaoAuthRepositoryImpl @Inject constructor(
         return kakaoUserRemoteSource.getUserIndex(kakaoAuthRemoteSource.initKakaoSignIn().setKakaoToken())
     }
 
+    override suspend fun initKakaoSignOut() {
+        kakaoAuthRemoteSource.initKakaoSignOut()
+    }
+
     private fun String.setKakaoToken() : String = "Bearer $this"
 
 }

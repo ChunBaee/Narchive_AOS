@@ -1,5 +1,6 @@
 package com.chunb.narchive.presentation.ui.auth.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,7 @@ class SignInViewModel @Inject constructor(
         viewModelScope.launch {
             kakaoAuthRepository.initKakaoLogin()
                 .onSuccess { authToRemote(it)}
+                .onFailure { Log.d("----", "onKakaoAuthClick: $it") }
         }
     }
 

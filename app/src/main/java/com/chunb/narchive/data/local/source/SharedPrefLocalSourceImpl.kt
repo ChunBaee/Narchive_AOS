@@ -18,4 +18,8 @@ class SharedPrefLocalSourceImpl : SharedPrefSource {
     override suspend fun getUserId(): String {
         return mSharedPreferences.getString("userId", "NULL") ?: "NULL"
     }
+
+    override suspend fun deleteUserJWT() {
+        mSharedPreferences.edit().clear().apply()
+    }
 }

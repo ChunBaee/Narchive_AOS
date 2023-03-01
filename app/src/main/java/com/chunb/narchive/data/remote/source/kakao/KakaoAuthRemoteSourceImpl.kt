@@ -1,6 +1,7 @@
 package com.chunb.narchive.data.remote.source.kakao
 
 import android.content.Context
+import android.util.Log
 import com.chunb.narchive.data.source.KakaoAuthSource
 import com.kakao.sdk.auth.TokenManagerProvider
 import com.kakao.sdk.auth.model.OAuthToken
@@ -25,6 +26,7 @@ class KakaoAuthRemoteSourceImpl @Inject constructor(
                 checkWithKakaoAccount()
             }
         }
+        Log.d("----", "initKakaoSignIn: ${TokenManagerProvider.instance.manager.getToken()?.refreshToken.toString()}")
         return TokenManagerProvider.instance.manager.getToken()?.accessToken.toString()
     }
 
@@ -46,5 +48,10 @@ class KakaoAuthRemoteSourceImpl @Inject constructor(
 
     override fun checkWithKakaoAccount() {
         UserApiClient.instance.loginWithKakaoAccount(context, callback = kakaoCallback)
+    }
+
+    override suspend fun initKakaoSignOut() {
+        UserApiClient.instance.logout { _ ->
+        }
     }
 }

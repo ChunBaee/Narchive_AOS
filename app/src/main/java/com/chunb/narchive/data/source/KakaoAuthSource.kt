@@ -10,4 +10,6 @@ interface KakaoAuthSource {
 
     fun checkWithKakaoAccount()
 
+    suspend fun initKakaoSignOut()
+
 }

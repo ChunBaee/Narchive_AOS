@@ -9,6 +9,7 @@ import com.chunb.narchive.databinding.ActivityMainBinding
 import com.chunb.narchive.presentation.ui.filter.view.FilterActivity
 import com.chunb.narchive.presentation.ui.main.archive.view.ArchiveFragment
 import com.chunb.narchive.presentation.ui.main.feed.view.FeedFragment
+import com.chunb.narchive.presentation.ui.main.setting.view.SettingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout_container, ArchiveFragment()).commit()
                 }
                 R.id.main_btm_settings -> {
-                    //supportFragmentManager.beginTransaction().replace(R.id.main_layout_container, SettingFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout_container, SettingFragment()).commit()
                 }
             }
             return@setOnItemSelectedListener true

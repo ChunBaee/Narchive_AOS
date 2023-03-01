@@ -5,5 +5,5 @@ import com.chunb.narchive.data.remote.response.User
 
 interface UserRepository {
 
-    suspend fun getUserWithContentId(query : String?) : Result<List<User>>
+    suspend fun getUserData() : Result<User>
 }

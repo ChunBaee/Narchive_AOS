@@ -10,4 +10,6 @@ interface AuthRepository {
     suspend fun saveUserInfoInLocal (userInfo : ResponseSignIn) : Result<String>
 
     suspend fun autoSignIn() : Result<ResponseSignIn>
+
+    suspend fun deleteUserJWT()
 }

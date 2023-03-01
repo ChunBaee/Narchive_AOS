@@ -7,4 +7,6 @@ interface SharedPrefSource {
     suspend fun saveUserInfo(userInfo : ResponseSignIn) : Result<String>
 
     suspend fun getUserId() : String
+
+    suspend fun deleteUserJWT()
 }
