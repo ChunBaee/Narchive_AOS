@@ -19,10 +19,7 @@ class WriteImageAdapter : RecyclerView.Adapter<WriteImageAdapter.WriteImageViewH
         return WriteImageViewHolder(ItemFormHorizontalImageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    override fun getItemCount(): Int {
-        Log.d("----", "getItemCount: ${images.size}")
-      return images.size
-    }
+    override fun getItemCount(): Int = images.size
 
     override fun onBindViewHolder(holder: WriteImageViewHolder, position: Int) {
         holder.bind(images[position])

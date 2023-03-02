@@ -22,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.log
 
 @AndroidEntryPoint
 class FeedFragment : Fragment() {
@@ -39,10 +40,9 @@ class FeedFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
 
-        Log.d("----", "onCreateView: Hi")
-
         initBinding()
         initFeed()
+        observeFeed()
 
         return binding.root
     }
@@ -50,12 +50,12 @@ class FeedFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         refreshOnResume()
-        scrollToTop()
     }
 
     private fun refreshOnResume() {
-        //viewModel.getFeedData()
-        observeFeed()
+        feedAdapter.refresh().also {
+            scrollToTop()
+        }
     }
 
     private fun initBinding() {
@@ -66,7 +66,6 @@ class FeedFragment : Fragment() {
     private fun initFeed() {
         feedAdapter = FeedListAdapter(::openDetailFeedActivity)
         binding.fgMainRvContents.adapter = feedAdapter
-
     }
 
     private fun observeFeed() {
@@ -91,5 +90,4 @@ class FeedFragment : Fragment() {
         intent.putExtra("contentIdx", position)
         startActivity(intent)
     }
-
 }
