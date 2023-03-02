@@ -49,7 +49,7 @@ class SettingDialog : DialogFragment() {
         val params: ViewGroup.LayoutParams? = dialog?.window?.attributes
         val deviceWidth = size.x
         params?.width = (deviceWidth * 0.95).toInt()
-        params?.height = (deviceWidth * 0.9).toInt()
+        params?.height = (deviceWidth * 0.5).toInt()
         dialog?.window?.attributes = params as WindowManager.LayoutParams
     }
 

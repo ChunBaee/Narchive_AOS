@@ -81,8 +81,9 @@ class ProfileActivity : AppCompatActivity() {
         viewModel.remoteCode.observe(this) {
             loadingDialog.dismiss()
             if(it == 200) {
-                //:TODO Y/N 분기처리 하기
-                startActivity(Intent(this, OnBoardingActivity::class.java))
+                if(viewModel.isNew.value == true) {
+                    startActivity(Intent(this, OnBoardingActivity::class.java))
+                }
                 finish()
             } else {
                 Snackbar.make(binding.root, "예기치 못한 오류가 발생했습니다. 다시 시도해주세요.", Snackbar.LENGTH_SHORT).show()

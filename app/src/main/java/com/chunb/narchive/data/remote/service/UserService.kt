@@ -10,6 +10,4 @@ interface UserService {
     @GET("/users")
     suspend fun getUserData() : Response<User>
 
-
-
 }

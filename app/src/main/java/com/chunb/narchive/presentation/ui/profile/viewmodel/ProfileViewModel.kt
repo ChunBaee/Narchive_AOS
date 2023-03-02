@@ -9,6 +9,7 @@ import com.chunb.narchive.R
 import com.chunb.narchive.data.remote.request.RequestPostProfile
 import com.chunb.narchive.domain.repository.FirebaseRepository
 import com.chunb.narchive.domain.repository.ProfileRepository
+import com.chunb.narchive.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,8 +17,13 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val firebaseRepository: FirebaseRepository,
-    private val profileRepository: ProfileRepository
+    private val profileRepository: ProfileRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
+
+    init {
+        getUserProfile()
+    }
 
     val userNickName = MutableLiveData<String>().apply { }
 
@@ -30,6 +36,20 @@ class ProfileViewModel @Inject constructor(
 
     private val _remoteCode = MutableLiveData<Int>()
     val remoteCode : LiveData<Int> = _remoteCode
+
+    val isNew = MutableLiveData<Boolean>()
+
+    private fun getUserProfile() {
+        viewModelScope.launch {
+            userRepository.getUserData()
+                .onSuccess {
+                    setProfileImage(it.userProfileImage)
+                    userNickName.value = it.userNickName
+                    isNew.value = false
+                }
+                .onFailure { isNew.value = true }
+        }
+    }
 
     fun setProfileImage(path: Any) {
         _userProfileImage.value = path
@@ -45,10 +65,14 @@ class ProfileViewModel @Inject constructor(
 
     fun uploadProfileToFirebase() {
         viewModelScope.launch {
-            firebaseRepository.uploadProfileToFirebase(
-                userProfileImage.value as Uri,
-                userProfileImageDownloadURL
-            )
+            try {
+                firebaseRepository.uploadProfileToFirebase(
+                    userProfileImage.value as Uri,
+                    userProfileImageDownloadURL
+                )
+            } catch(exception : ClassCastException) {
+                postUserProfileToRemote(userProfileImage.value as String)
+            }
         }
     }
 
