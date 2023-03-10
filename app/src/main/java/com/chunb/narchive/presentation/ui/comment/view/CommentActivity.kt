@@ -16,10 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CommentActivity : AppCompatActivity() {
     private lateinit var binding : ActivityAddCommentBinding
     private val viewModel : CommentViewModel by viewModels()
-
-    private val commentAdapter by lazy {
-        CommentAdapter()
-    }
+    private lateinit var commentAdapter: CommentAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_comment)
@@ -27,10 +24,11 @@ class CommentActivity : AppCompatActivity() {
         initBinding()
         getContentId()
         observeContentId()
-        initCommentRv()
         observeCommentData()
         observeSnackbarData()
     }
+
+    fun commentAdapter() = CommentAdapter().also { commentAdapter = it }
 
     private fun initBinding() {
         binding.activity = this
@@ -46,10 +44,6 @@ class CommentActivity : AppCompatActivity() {
         viewModel.contentIdx.observe(this) {
             viewModel.getComments(it)
         }
-    }
-
-    private fun initCommentRv() {
-        binding.commentRvComments.adapter = commentAdapter
     }
 
     private fun observeCommentData() {

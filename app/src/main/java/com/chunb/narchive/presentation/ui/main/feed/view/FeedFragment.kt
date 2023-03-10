@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.chunb.narchive.R
+import com.chunb.narchive.data.remote.response.Feed
 import com.chunb.narchive.databinding.FragmentFeedBinding
 import com.chunb.narchive.presentation.ui.detail.view.DetailActivity
 import com.chunb.narchive.presentation.ui.main.feed.adapter.FeedListAdapter
@@ -41,31 +42,19 @@ class FeedFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
 
         initBinding()
-        initFeed()
-        observeFeed()
 
         return binding.root
     }
 
+    fun feedAdapter() = FeedListAdapter(::openDetailFeedActivity).also { feedAdapter = it }
     override fun onResume() {
         super.onResume()
-        refreshOnResume()
-    }
-
-    private fun refreshOnResume() {
-        feedAdapter.refresh().also {
-            scrollToTop()
-        }
+        observeFeed()
     }
 
     private fun initBinding() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.fragment = this
-    }
-
-    private fun initFeed() {
-        feedAdapter = FeedListAdapter(::openDetailFeedActivity)
-        binding.fgMainRvContents.adapter = feedAdapter
     }
 
     private fun observeFeed() {

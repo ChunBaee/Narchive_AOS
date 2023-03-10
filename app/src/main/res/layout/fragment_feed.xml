@@ -20,6 +20,7 @@
             android:orientation="vertical"
             android:paddingVertical="10dp"
             android:overScrollMode="never"
+            feed_Adapter="@{fragment.feedAdapter()}"
             app:layout_constrainedHeight="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent"

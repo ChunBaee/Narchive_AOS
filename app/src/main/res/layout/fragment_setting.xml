@@ -32,7 +32,7 @@
                 android:id="@+id/fg_setting_iv_profile"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                setCircleImage="@{viewModel.userData.userProfileImage}"
+                common_setCircleImage="@{viewModel.userData.userProfileImage}"
                 app:layout_constraintVertical_bias="0.2"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintHeight_percent="0.5"

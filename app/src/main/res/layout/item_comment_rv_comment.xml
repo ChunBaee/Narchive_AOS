@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/item_comment_rv_comments_iv_profile"
-            setCircleImage="@{data.userProfileImage}"
+            common_setCircleImage="@{data.userProfileImage}"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="20dp"

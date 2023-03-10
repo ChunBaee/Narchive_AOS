@@ -68,8 +68,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun observeDetail() {
-        viewModel.contentData.observe(this) { it ->
-            Log.d("----", "observeDetail: ${it.book}")
+        viewModel.contentData.observe(this) {
             binding.content = it
             binding.mood = Mood.valueOf(it.mood).res
             it.images?.let { images -> setVp(images) }

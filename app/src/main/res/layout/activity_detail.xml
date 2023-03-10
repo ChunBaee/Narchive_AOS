@@ -82,7 +82,7 @@
 
                     <ImageView
                         android:id="@+id/detail_iv_profile"
-                        setCircleImage="@{content.user.userProfileImage}"
+                        common_setCircleImage="@{content.user.userProfileImage}"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="15dp"
@@ -90,7 +90,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        setCircleImage="@{mood}"
+                        common_setCircleImage="@{mood}"
                         android:layout_width="17dp"
                         android:layout_height="17dp"
                         app:layout_constraintBottom_toBottomOf="@id/detail_iv_profile"

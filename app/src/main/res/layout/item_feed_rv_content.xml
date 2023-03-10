@@ -45,7 +45,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                setCircleImage="@{feed.user.userProfileImage}"
+                common_setCircleImage="@{feed.user.userProfileImage}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +53,7 @@
                 android:id="@+id/item_main_rv_contents_iv_mood"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                setCircleImage="@{mood}"
+                common_setCircleImage="@{mood}"
                 app:layout_constraintEnd_toEndOf="@id/item_main_rv_contents_iv_profile"
                 app:layout_constraintBottom_toBottomOf="@id/item_main_rv_contents_iv_profile" />
 

@@ -58,6 +58,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:overScrollMode="never"
             app:layout_constrainedHeight="true"
+            comment_Adapter="@{activity.commentAdapter()}"
             app:layout_constraintBottom_toTopOf="@id/comment_layout_bottomBar"
             app:layout_constraintTop_toBottomOf="@id/comment_layout_toolbar"
             app:layout_constraintVertical_bias="0" />

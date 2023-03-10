@@ -87,6 +87,7 @@
             android:orientation="vertical"
             android:paddingVertical="10dp"
             app:layout_constrainedHeight="true"
+            filter_Adapter="@{activity.filterAdapter()}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/filter_layout_toolbar"
             app:layout_constraintEnd_toEndOf="parent"

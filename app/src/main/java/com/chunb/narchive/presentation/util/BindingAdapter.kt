@@ -19,7 +19,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-@BindingAdapter("setCircleImage")
+@BindingAdapter("common_setCircleImage")
 fun ImageView.setCircleImage(path: Any?) {
     Glide.with(this).load(path).circleCrop().into(this)
 }
@@ -27,19 +27,6 @@ fun ImageView.setCircleImage(path: Any?) {
 @BindingAdapter("setImage")
 fun ImageView.setImage(path: Any?) {
     Glide.with(this).load(path).into(this)
-}
-
-@BindingAdapter("onBoardingAdapter", "setIndicator", "isEnabled")
-fun ViewPager2.setVP(onBoardingAdapter: OnBoardingAdapter, indicator: TabLayout, startBtn: Button) {
-    this.adapter = onBoardingAdapter
-    this.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageSelected(position: Int) {
-            super.onPageSelected(position)
-            startBtn.isEnabled = position + 1 == onBoardingAdapter.itemCount
-        }
-    })
-    TabLayoutMediator(indicator, this) { _, _ ->
-    }.attach()
 }
 
 @BindingAdapter("setBookAndMovieInfoForm")

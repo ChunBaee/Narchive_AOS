@@ -24,19 +24,14 @@ class FilterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        initRvAdapter()
-        initObserve()
     }
+
+    fun filterAdapter() = FilterFeedAdapter(::openDetailFeedActivity).also { filterAdapter = it }
 
     private fun initView() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_filter)
         binding.viewModel = viewModel
         binding.activity = this
-    }
-
-    private fun initRvAdapter() {
-        filterAdapter = FilterFeedAdapter(::openDetailFeedActivity)
-        binding.filterRvResult.adapter = filterAdapter
     }
 
     fun initObserve() {

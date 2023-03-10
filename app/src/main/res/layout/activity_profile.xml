@@ -39,7 +39,7 @@
 
         <ImageView
             android:id="@+id/set_profile_iv_user_profile"
-            setCircleImage="@{viewModel.userProfileImage}"
+            common_setCircleImage="@{viewModel.userProfileImage}"
             android:layout_width="225dp"
             android:layout_height="225dp"
             android:background="@drawable/bg_card_200_f7f8f9"
