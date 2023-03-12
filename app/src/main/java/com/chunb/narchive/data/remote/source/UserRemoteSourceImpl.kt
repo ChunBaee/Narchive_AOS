@@ -23,4 +23,12 @@ class UserRemoteSourceImpl @Inject constructor(private val userService: UserServ
         }
         return Result.failure(IllegalArgumentException())
     }
+
+    override suspend fun getUserAllProfileImage(): Result<List<String>> {
+        val userProfileImagesRes = userService.getUserAllProfileImages()
+        if(userProfileImagesRes.isSuccessful) {
+            return Result.success(userProfileImagesRes.body()!!)
+        }
+        return Result.failure(IllegalArgumentException())
+    }
 }

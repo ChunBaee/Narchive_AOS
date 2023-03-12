@@ -15,6 +15,7 @@ import com.chunb.narchive.presentation.ui.main.setting.adapter.SettingMenuAdapte
 import com.chunb.narchive.presentation.ui.main.viewmodel.MainViewModel
 import com.chunb.narchive.presentation.ui.profile.view.ProfileActivity
 import com.chunb.narchive.presentation.ui.splash.view.SplashActivity
+import com.chunb.narchive.presentation.ui.totalprofiles.view.UserProfileActivity
 
 class SettingFragment : Fragment() {
     private lateinit var binding : FragmentSettingBinding
@@ -58,10 +59,13 @@ class SettingFragment : Fragment() {
         settingMenuAdapter.menuClickedListener(object : SettingMenuAdapter.MenuClickedListener {
             override fun menuClickedListener(view: View, position: Int) {
                 when(position) {
-                    1 -> {
+                    0 -> {
                         startActivity(Intent(requireActivity(), ProfileActivity::class.java))
                     }
-                    0,2 -> {
+                    1 -> {
+                        startActivity(Intent(requireActivity(), UserProfileActivity::class.java))
+                    }
+                    4,5 -> {
                         viewModel.setDialogType(position)
                         SettingDialog().show(childFragmentManager, "Dialog")
                     }

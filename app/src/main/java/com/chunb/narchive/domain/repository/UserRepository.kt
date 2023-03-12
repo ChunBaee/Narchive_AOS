@@ -8,4 +8,6 @@ interface UserRepository {
     suspend fun getUserData() : Result<User>
 
     suspend fun getUserProfileData() : Result<SettingUser>
+
+    suspend fun getUserAllProfileImages() : Result<List<String>>
 }

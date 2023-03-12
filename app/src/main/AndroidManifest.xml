@@ -61,6 +61,11 @@
         <activity android:name=".presentation.ui.filter.view.FilterActivity"
             android:exported="true" />
 
+        <activity android:name=".presentation.ui.totalprofiles.view.UserProfileActivity"
+            android:exported="true"
+            android:theme="@style/SeeAllProfileImageTheme"
+            />
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">

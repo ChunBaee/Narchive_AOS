@@ -16,4 +16,8 @@ class UserRepositoryImpl @Inject constructor(private val userRemoteSource: UserS
     override suspend fun getUserProfileData(): Result<SettingUser> {
         return userRemoteSource.getUserSettingProfileData()
     }
+
+    override suspend fun getUserAllProfileImages(): Result<List<String>> {
+        return userRemoteSource.getUserAllProfileImage()
+    }
 }

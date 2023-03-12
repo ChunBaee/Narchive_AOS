@@ -7,4 +7,6 @@ interface UserSource {
     suspend fun getUserData() : Result<User>
 
     suspend fun getUserSettingProfileData() : Result<SettingUser>
+
+    suspend fun getUserAllProfileImage() : Result<List<String>>
 }

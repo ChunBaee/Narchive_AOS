@@ -14,5 +14,8 @@ interface UserService {
     @GET("/users/profile")
     suspend fun getUserSettingProfileData() : Response<SettingUser>
 
+    @GET("/users/profile/images")
+    suspend fun getUserAllProfileImages() : Response<List<String>>
+
 
 }
