@@ -111,4 +111,12 @@ class DetailActivity : AppCompatActivity() {
         intent.putExtra("contentIdx", viewModel.contentIdx.value)
         startActivity(intent)
     }
+
+    fun onBookClicked() {
+        binding.itemMainRvContentsLayoutBook.root.visibility = if(binding.itemMainRvContentsLayoutBook.root.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+    }
+
+    fun onMovieClicked() {
+        binding.itemMainRvContentsLayoutMovie.root.visibility = if(binding.itemMainRvContentsLayoutMovie.root.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+    }
 }

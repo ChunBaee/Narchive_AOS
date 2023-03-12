@@ -109,13 +109,6 @@
                         app:layout_constraintTop_toTopOf="@id/detail_iv_profile"
                         tools:text="김춘배" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/color_d9d9d9"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/detail_iv_profile" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -170,8 +163,8 @@
                 <View
                     android:id="@+id/detail_divider_content"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:background="@color/color_e8f6f6_06102c"
+                    android:layout_height="10dp"
+                    android:background="@color/color_e8e9ea"
                     app:layout_constraintTop_toBottomOf="@id/detail_tv_content" />
 
                 <LinearLayout
@@ -181,6 +174,7 @@
                     android:orientation="vertical"
                     android:layout_marginTop="10dp"
                     android:paddingBottom="10dp"
+                    android:animateLayoutChanges="true"
                     android:visibility="@{content.book.isEmpty() ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="@id/detail_tv_content"
                     app:layout_constraintStart_toStartOf="@id/detail_tv_content"
@@ -195,6 +189,7 @@
                         android:textColor="@color/black_white"
                         android:textSize="17sp"
                         android:textStyle="bold"
+                        android:onClick="@{() -> activity.onBookClicked()}"
                         app:layout_constraintEnd_toEndOf="@id/detail_tv_content"
                         app:layout_constraintStart_toStartOf="@id/detail_tv_content"
                         app:layout_constraintTop_toBottomOf="@id/detail_tab_indicator" />
@@ -203,6 +198,7 @@
                         android:id="@+id/item_main_rv_contents_layout_book"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:inflatedId="@+id/item_main_rv_contents_layout_book_inflated"
                         android:layout="@layout/item_form_book" />
 
@@ -214,6 +210,7 @@
                     android:layout_height="wrap_content"
                     android:visibility="@{content.movie.isEmpty() ? View.GONE : View.VISIBLE}"
                     android:orientation="vertical"
+                    android:animateLayoutChanges="true"
                     app:layout_constraintEnd_toEndOf="@id/detail_tv_content"
                     app:layout_constraintStart_toStartOf="@id/detail_tv_content"
                     app:layout_constraintTop_toBottomOf="@id/detail_viewstub_book">
@@ -224,6 +221,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:elevation="0.1dp"
+                        android:onClick="@{() -> activity.onMovieClicked()}"
                         android:text="• 오늘은 이 영화를 봤어요!"
                         android:textColor="@color/black_white"
                         android:textSize="17sp"
@@ -233,6 +231,7 @@
                         android:id="@+id/item_main_rv_contents_layout_movie"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:inflatedId="@+id/item_main_rv_contents_layout_movie_inflated"
                         android:layout="@layout/item_form_movie" />
 
