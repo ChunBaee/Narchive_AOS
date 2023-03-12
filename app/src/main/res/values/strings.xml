@@ -54,6 +54,14 @@
     <string name="dark_mode">항상 어두운 색으로 볼래요!</string>
     <string name="omakase">나카이브에게 맡길래요!</string>
 
+    <string name="count_write_archive">기록한 글</string>
+    <string name="count_write">%d개</string>
+    <string name="count_book_archive">읽은 책</string>
+    <string name="count_book">%d권</string>
+    <string name="count_movie_archive">본 영화</string>
+    <string name="count_movie">%d편</string>
+
+
     <string name="allow">
         제 1 장 총칙
 

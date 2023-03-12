@@ -45,8 +45,10 @@ class LocalResourceSourceImpl : LocalResourceSource {
 
     override fun getSettingMenuData(): List<SettingMenuData> =
         listOf(
-            SettingMenuData(R.drawable.ic_sign_out, "로그아웃"),
             SettingMenuData(R.drawable.ic_edit_profile, "프로필 수정"),
+            SettingMenuData(R.drawable.ic_edit_profile, "프로필 사진 모아보기"),
+            SettingMenuData(0, ""),
+            SettingMenuData(R.drawable.ic_sign_out, "로그아웃"),
             SettingMenuData(R.drawable.ic_delete_user, "회원 탈퇴"),
         )
 

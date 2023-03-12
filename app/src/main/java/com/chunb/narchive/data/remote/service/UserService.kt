@@ -1,5 +1,6 @@
 package com.chunb.narchive.data.remote.service
 
+import com.chunb.narchive.data.remote.response.SettingUser
 import com.chunb.narchive.data.remote.response.User
 import retrofit2.Response
 import retrofit2.http.GET
@@ -9,5 +10,9 @@ interface UserService {
 
     @GET("/users")
     suspend fun getUserData() : Response<User>
+
+    @GET("/users/profile")
+    suspend fun getUserSettingProfileData() : Response<SettingUser>
+
 
 }

@@ -13,6 +13,7 @@ import com.chunb.narchive.data.remote.response.ArchiveBook
 import com.chunb.narchive.data.remote.response.ArchiveMovie
 import com.chunb.narchive.data.remote.response.Feed
 import com.chunb.narchive.data.remote.response.Image
+import com.chunb.narchive.data.remote.response.SettingUser
 import com.chunb.narchive.data.remote.response.User
 import com.chunb.narchive.domain.repository.AuthRepository
 import com.chunb.narchive.domain.repository.BookRepository
@@ -49,8 +50,8 @@ class MainViewModel @Inject constructor(
     private val _settingMenuData = MutableLiveData<List<SettingMenuData>>().apply { value = localResourceRepository.getSettingMenuData() }
     val settingMenuData : LiveData<List<SettingMenuData>> = _settingMenuData
 
-    private val _userData = MutableLiveData<User>()
-    val userData : LiveData<User> = _userData
+    private val _userData = MutableLiveData<SettingUser>()
+    val userData : LiveData<SettingUser> = _userData
 
     private val _dialogTitle = MutableLiveData<String>()
     val dialogTitle : LiveData<String> = _dialogTitle
@@ -77,7 +78,7 @@ class MainViewModel @Inject constructor(
 
     fun getUserRes() {
         viewModelScope.launch {
-            userRepository.getUserData()
+            userRepository.getUserProfileData()
                 .onSuccess { _userData.value = it }
         }
     }
