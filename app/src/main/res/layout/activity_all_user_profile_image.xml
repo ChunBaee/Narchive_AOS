@@ -14,6 +14,7 @@
         android:background="@color/black_white">
 
         <ImageView
+            android:id="@+id/all_profile_btn_dismiss"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_margin="15dp"
@@ -27,9 +28,10 @@
             android:id="@+id/user_profile_tv_divier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textColor="@color/white"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/all_profile_btn_dismiss"
+            app:layout_constraintBottom_toBottomOf="@id/all_profile_btn_dismiss"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

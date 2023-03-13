@@ -65,7 +65,7 @@ class SettingFragment : Fragment() {
                     1 -> {
                         startActivity(Intent(requireActivity(), UserProfileActivity::class.java))
                     }
-                    4,5 -> {
+                    3,4 -> {
                         viewModel.setDialogType(position)
                         SettingDialog().show(childFragmentManager, "Dialog")
                     }

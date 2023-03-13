@@ -101,14 +101,14 @@ class MainViewModel @Inject constructor(
     fun setDialogType(type : Int) {
         _dialogType.value = type
         _dialogTitle.value = when(type) {
-            0 ->  "정말 로그아웃 하시겠어요?"
+            3 ->  "정말 로그아웃 하시겠어요?"
             else -> "정말 탈퇴하시겠어요?"
         }
     }
 
     fun onDialogClickYes() {
         when(_dialogType.value) {
-            0 -> initSignOut()
+            3 -> initSignOut()
             else -> initDeleteUser()
         }
     }

@@ -64,8 +64,7 @@
                 android:layout_marginStart="10dp"
                 android:text="@{feed.user.userNickName}"
                 android:textColor="@color/black_white"
-                android:textSize="15sp"
-                android:textStyle="bold"
+                android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@id/item_main_rv_contents_iv_profile"
                 app:layout_constraintTop_toTopOf="@id/item_main_rv_contents_iv_profile"
                 app:layout_constraintBottom_toTopOf="@id/item_main_rv_contents_tv_date"/>
@@ -76,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{feed.updatedAt}"
                 android:textColor="@color/color_bdbdbd"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 app:layout_constraintStart_toStartOf="@id/item_main_rv_contents_tv_nickname"
                 app:layout_constraintTop_toBottomOf="@id/item_main_rv_contents_tv_nickname"
                 app:layout_constraintBottom_toBottomOf="@id/item_main_rv_contents_iv_profile"/>
@@ -89,7 +88,8 @@
                 android:layout_marginEnd="20dp"
                 android:lineHeight="20dp"
                 android:textColor="@color/black_white"
-                android:textSize="15sp"
+                android:textSize="20sp"
+                android:fontFamily="@font/font_shy_collage"
                 android:text="@{feed.content}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
