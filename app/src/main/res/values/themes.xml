@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/color_b2f0f4_090022</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:fontFamily">@font/font_shy_collage</item>
+        <item name="android:fontFamily">@font/kyobohandwriting2019</item>
         <!-- Customize your theme here. -->
     </style>
 
