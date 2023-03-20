@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/allow"
-            android:textSize="17sp" />
+            android:textSize="12sp" />
 
     </ScrollView>
 

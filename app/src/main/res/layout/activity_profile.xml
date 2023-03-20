@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/set_profile"
                 android:textColor="@color/black_white"
-                android:textSize="23sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
             android:padding="10dp"
             android:text="@={viewModel.userNickName}"
             android:textColor="@color/black_white"
-            android:textSize="22sp"
+            android:textSize="16sp"
             android:hint="닉네임"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
             android:layout_marginTop="5dp"
             android:text="@string/set_profile_nickname_notion"
             android:textColor="@color/color_d9d9d9"
-            android:textSize="16sp"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@id/set_profile_edt_user_nickname"
             app:layout_constraintTop_toBottomOf="@id/set_profile_edt_user_nickname" />
 
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:text="* 이용약관은 여기를 클릭해주세요."
             android:textColor="@color/color_d9d9d9"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:layout_marginTop="5dp"
             android:onClick="@{() -> activity.openAllowDialog()}"
             app:layout_constraintTop_toBottomOf="@id/profile_tv_notice"
@@ -102,7 +102,7 @@
             android:onClick="@{() -> activity.uploadToFB()}"
             android:enabled="@{viewModel.isProfileFinished}"
             android:textColor="@color/white_black"
-            android:textSize="23sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent">
 
         </androidx.appcompat.widget.AppCompatButton>

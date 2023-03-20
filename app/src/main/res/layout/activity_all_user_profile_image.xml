@@ -28,7 +28,7 @@
             android:id="@+id/user_profile_tv_divier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="@id/all_profile_btn_dismiss"
             app:layout_constraintBottom_toBottomOf="@id/all_profile_btn_dismiss"
